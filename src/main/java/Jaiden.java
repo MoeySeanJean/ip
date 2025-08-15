@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jaiden {
@@ -10,8 +11,7 @@ public class Jaiden {
         String exit = "    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________\n";
-        Task[] tasks = new Task[100];
-        int index = 0;
+        ArrayList<Task> tasks = new ArrayList<Task>();
         System.out.println(greet);
         String input = scanner.nextLine();
         try {
@@ -19,8 +19,8 @@ public class Jaiden {
                 if (input.equals("list")) {
                     String msg = "    ____________________________________________________________\n"
                             + "     Here are the tasks in your list:\n";
-                    for (int i = 0; i < index; i++) {
-                        msg += "     " + (i + 1) + "." + tasks[i].toString() + "\n";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        msg += "     " + (i + 1) + "." + tasks.get(i).toString() + "\n";
                     }
                     msg += "    ____________________________________________________________\n";
                     System.out.println(msg);
@@ -29,10 +29,10 @@ public class Jaiden {
                         throw new DukeException(0, "index", "mark");
                     }
                     int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    tasks[markIndex].markAsDone();
+                    tasks.get(markIndex).markAsDone();
                     String msg = "    ____________________________________________________________\n"
                             + "     Nice! I've marked this task as done:\n"
-                            + "       " + tasks[markIndex].toString() + "\n"
+                            + "       " + tasks.get(markIndex).toString() + "\n"
                             + "    ____________________________________________________________\n";
                     System.out.println(msg);
                 } else if (input.startsWith("unmark")) {
@@ -40,10 +40,10 @@ public class Jaiden {
                         throw new DukeException(0, "index", "unmark");
                     }
                     int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    tasks[markIndex].markAsNotDone();
+                    tasks.get(markIndex).markAsNotDone();
                     String msg = "    ____________________________________________________________\n"
                             + "     OK, I've marked this task as not done yet:\n"
-                            + "       " + tasks[markIndex].toString() + "\n"
+                            + "       " + tasks.get(markIndex).toString() + "\n"
                             + "    ____________________________________________________________\n";
                     System.out.println(msg);
                 } else if (input.startsWith("todo")) {
@@ -52,11 +52,11 @@ public class Jaiden {
                     }
                     String description = input.substring(5);
                     Task task = new Todo(description);
-                    tasks[index++] = task;
+                    tasks.add(task);
                     String msg = "    ____________________________________________________________\n"
                             + "     Got it. I've added this task:\n"
                             + "       " + task.toString() + "\n"
-                            + "     Now you have " + index + " tasks in the list.\n"
+                            + "     Now you have " + tasks.size() + " tasks in the list.\n"
                             + "    ____________________________________________________________\n";
                     System.out.println(msg);
                 } else if (input.startsWith("deadline")) {
@@ -69,11 +69,11 @@ public class Jaiden {
                     String description = input.substring(9, input.indexOf("/by") - 1);
                     String by = input.substring(input.indexOf("/by") + 4);
                     Task task = new Deadline(description, by);
-                    tasks[index++] = task;
+                    tasks.add(task);
                     String msg = "    ____________________________________________________________\n"
                             + "     Got it. I've added this task:\n"
                             + "       " + task.toString() + "\n"
-                            + "     Now you have " + index + " tasks in the list.\n"
+                            + "     Now you have " + tasks.size() + " tasks in the list.\n"
                             + "    ____________________________________________________________\n";
                     System.out.println(msg);
                 } else if (input.startsWith("event")) {
@@ -91,11 +91,23 @@ public class Jaiden {
                     String from = input.substring(input.indexOf("/from") + 6, input.indexOf("/to") - 1);
                     String to = input.substring(input.indexOf("/to") + 4);
                     Task task = new Event(description, from, to);
-                    tasks[index++] = task;
+                    tasks.add(task);
                     String msg = "    ____________________________________________________________\n"
                             + "     Got it. I've added this task:\n"
                             + "       " + task.toString() + "\n"
-                            + "     Now you have " + index + " tasks in the list.\n"
+                            + "     Now you have " + tasks.size() + " tasks in the list.\n"
+                            + "    ____________________________________________________________\n";
+                    System.out.println(msg);
+                } else if (input.startsWith("delete")) {
+                    if (input.length() < 8 || input.substring(7).isBlank()) {
+                        throw new DukeException(0, "index", "delete");
+                    }
+                    int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    Task task = tasks.remove(deleteIndex);
+                    String msg = "    ____________________________________________________________\n"
+                            + "     Noted. I've removed this task:\n"
+                            + "       " + task.toString() + "\n"
+                            + "     Now you have " + tasks.size() + " tasks in the list.\n"
                             + "    ____________________________________________________________\n";
                     System.out.println(msg);
                 } else {
