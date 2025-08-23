@@ -145,11 +145,14 @@ public class Jaiden {
                         int byIndex = input.contains("/by") ? input.indexOf("/by") : input.length();
                         if (input.length() < 10 || input.substring(9, byIndex).isBlank()) {
                             throw new DukeException(0, "description", "deadline");
-                        } else if (!input.contains("/by")) {
+                        } else if (!input.contains("/by") || input.indexOf("/by") + 4 >= input.length()) {
                             throw new DukeException(0, "by", "deadline");
                         }
                         description = input.substring(9, input.indexOf("/by") - 1);
                         String by = input.substring(input.indexOf("/by") + 4);
+                        if (by.isBlank()) {
+                            throw new DukeException(0, "by", "deadline");
+                        }
                         task = new Deadline(description, by);
                         tasks.add(task);
                         msg = "    ____________________________________________________________\n"
@@ -165,14 +168,20 @@ public class Jaiden {
                         int descriptionEndIndex = Math.min(fromIndex, toIndex);
                         if (input.length() < 7 || input.substring(6, descriptionEndIndex).isBlank()) {
                             throw new DukeException(0, "description", "event");
-                        } else if (!input.contains("/from")) {
+                        } else if (!input.contains("/from") || input.indexOf("/from") + 6 >= toIndex) {
                             throw new DukeException(0, "from", "event");
-                        } else if (!input.contains("/to")) {
+                        } else if (!input.contains("/to") || input.indexOf("/to") + 4 >= input.length()) {
                             throw new DukeException(0, "to", "event");
                         }
                         description = input.substring(6, input.indexOf("/from") - 1);
                         String from = input.substring(input.indexOf("/from") + 6, input.indexOf("/to") - 1);
+                        if (from.isBlank()) {
+                            throw new DukeException(0, "from", "event");
+                        }
                         String to = input.substring(input.indexOf("/to") + 4);
+                        if (to.isBlank()) {
+                            throw new DukeException(0, "to", "event");
+                        }
                         task = new Event(description, from, to);
                         tasks.add(task);
                         msg = "    ____________________________________________________________\n"
