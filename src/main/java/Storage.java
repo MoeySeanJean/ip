@@ -52,13 +52,10 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             FileWriter dataWriter = new FileWriter(data);
-            String msg = "";
-            for (Task task : tasks) {
-                msg += task.save() + "\n";
-            }
+            String msg = tasks.save();
             dataWriter.write(msg);
             dataWriter.close();
         } catch (IOException e) {
