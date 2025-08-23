@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +15,7 @@ public class Jaiden {
         DEADLINE,
         EVENT,
         DELETE,
+        SHOW,
         BYE,
         UNKNOWN
     }
@@ -32,6 +35,8 @@ public class Jaiden {
             return Command.EVENT;
         } else if (command.startsWith("delete")) {
             return Command.DELETE;
+        } else if (command.startsWith("show")) {
+            return Command.SHOW;
         } else if (command.equals("bye")) {
             return Command.BYE;
         } else {
@@ -53,6 +58,7 @@ public class Jaiden {
         String input = scanner.nextLine();
         Command command = toCommand(input);
         File data = new File("./data/jaiden.txt");
+        FileWriter dataWriter = null;
         try {
             if (!data.exists()) {
                 new File("./data").mkdir();
@@ -72,22 +78,18 @@ public class Jaiden {
                         if (temp.length != 4 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank() || temp[3].isBlank()) {
                             throw new DukeException(2);
                         }
-                        tasks.add(new Deadline(temp[2], temp[1].equals("1"), temp[3]));
+                        tasks.add(new Deadline(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3])));
                     } else if (temp[0].equals("E")) {
-                        if (temp.length != 4 || !(temp[1].equals("0") || temp[1].equals("1"))  || temp[2].isBlank() || temp[3].isBlank()) {
+                        if (temp.length != 5 || !(temp[1].equals("0") || temp[1].equals("1"))  || temp[2].isBlank() || temp[3].isBlank() || temp[4].isBlank()) {
                             throw new DukeException(2);
                         }
-                        String[] toFrom = temp[3].split("-");
-                        if (toFrom.length != 2 || toFrom[0].isBlank() || toFrom[1].isBlank()) {
-                            throw new DukeException(2);
-                        }
-                        tasks.add(new Event(temp[2], temp[1].equals("1"), toFrom[0], toFrom[1]));
+                        tasks.add(new Event(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3]), LocalDate.parse(temp[4])));
                     } else {
                         throw new DukeException(2);
                     }
                 }
             }
-            FileWriter dataWriter = new FileWriter(data);
+            dataWriter = new FileWriter(data);
             while (command != Command.BYE) {
                 String msg;
                 Task task;
@@ -153,7 +155,8 @@ public class Jaiden {
                         if (by.isBlank()) {
                             throw new DukeException(0, "by", "deadline");
                         }
-                        task = new Deadline(description, by);
+                        LocalDate byDate = LocalDate.parse(by);
+                        task = new Deadline(description, byDate);
                         tasks.add(task);
                         msg = "    ____________________________________________________________\n"
                                 + "     Got it. I've added this task:\n"
@@ -178,11 +181,13 @@ public class Jaiden {
                         if (from.isBlank()) {
                             throw new DukeException(0, "from", "event");
                         }
+                        LocalDate fromDate = LocalDate.parse(from);
                         String to = input.substring(input.indexOf("/to") + 4);
                         if (to.isBlank()) {
                             throw new DukeException(0, "to", "event");
                         }
-                        task = new Event(description, from, to);
+                        LocalDate toDate = LocalDate.parse(to);
+                        task = new Event(description, fromDate, toDate);
                         tasks.add(task);
                         msg = "    ____________________________________________________________\n"
                                 + "     Got it. I've added this task:\n"
@@ -204,25 +209,53 @@ public class Jaiden {
                                 + "    ____________________________________________________________\n";
                         System.out.println(msg);
                         break;
+                    case SHOW:
+                        if (input.length() < 6 || input.substring(5).isBlank()) {
+                            throw new DukeException(0, "date", "show");
+                        }
+                        LocalDate showDate = LocalDate.parse(input.substring(5));
+                        msg = "    ____________________________________________________________\n"
+                                + "     Here are the tasks on " + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n";
+                        for (Task t : tasks) {
+                            if (t.getClass() == Deadline.class) {
+                                Deadline d = (Deadline) t;
+                                if (d.by.isAfter(showDate) || d.by.isEqual(showDate)) {
+                                    msg += "       " + t.toString() + "\n";
+                                }
+                            } else if (t.getClass() == Event.class) {
+                                Event e = (Event) t;
+                                if ((e.from.isBefore(showDate) || e.from.isEqual(showDate)) && (e.to.isAfter(showDate) || e.to.isEqual(showDate))) {
+                                    msg += "       " + t.toString() + "\n";
+                                }
+                            }
+                        }
+                        msg += "    ____________________________________________________________\n";
+                        System.out.println(msg);
+                        break;
                     case UNKNOWN:
                         throw new DukeException(1);
                 }
                 input = scanner.nextLine();
                 command = toCommand(input);
             }
-            String msg = "";
-            for (Task task : tasks) {
-                msg += task.save() + "\n";
-            }
-            dataWriter.write(msg);
-            dataWriter.close();
         } catch (DukeException e) {
             System.out.println(e);
         } catch (IOException e) {
             System.out.println(e);
         } finally {
-            System.out.println(exit);
-            scanner.close();
+            String msg = "";
+            for (Task task : tasks) {
+                msg += task.save() + "\n";
+            }
+            try {
+                dataWriter.write(msg);
+                dataWriter.close();
+            } catch (IOException e) {
+                System.out.println(e);
+            } finally {
+                System.out.println(exit);
+                scanner.close();
+            }
         }
     }
 }
