@@ -20,11 +20,17 @@ public class DukeException extends Exception {
                     + "     OOPS!!! The " + field + " of a " + task + " cannot be empty.\n"
                     + "    ____________________________________________________________\n";
             return msg;
-        } else {
+        } else if (exception == 1) {
             String msg = "    ____________________________________________________________\n"
                     + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________\n";
             return msg;
+        } else if (exception == 2) {
+            String msg = "    ____________________________________________________________\n"
+                    + "     The data file is corrupted (Content not in the expected format).\n"
+                    + "    ____________________________________________________________\n";
+            return msg;
         }
+        return super.toString();
     }
 }

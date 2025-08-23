@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +52,42 @@ public class Jaiden {
         System.out.println(greet);
         String input = scanner.nextLine();
         Command command = toCommand(input);
+        File data = new File("./data/jaiden.txt");
         try {
+            if (!data.exists()) {
+                new File("./data").mkdir();
+            } else {
+                Scanner dataReader = new Scanner(data);
+                while (dataReader.hasNextLine()) {
+                    String line = dataReader.nextLine();
+                    String[] temp = line.split(" \\| ");
+                    if (temp.length == 0) {
+                        throw new DukeException(2);
+                    } else if (temp[0].equals("T")) {
+                        if (temp.length != 3 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank()) {
+                            throw new DukeException(2);
+                        }
+                        tasks.add(new Todo(temp[2], temp[1].equals("1")));
+                    } else if (temp[0].equals("D")) {
+                        if (temp.length != 4 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank() || temp[3].isBlank()) {
+                            throw new DukeException(2);
+                        }
+                        tasks.add(new Deadline(temp[2], temp[1].equals("1"), temp[3]));
+                    } else if (temp[0].equals("E")) {
+                        if (temp.length != 4 || !(temp[1].equals("0") || temp[1].equals("1"))  || temp[2].isBlank() || temp[3].isBlank()) {
+                            throw new DukeException(2);
+                        }
+                        String[] toFrom = temp[3].split("-");
+                        if (toFrom.length != 2 || toFrom[0].isBlank() || toFrom[1].isBlank()) {
+                            throw new DukeException(2);
+                        }
+                        tasks.add(new Event(temp[2], temp[1].equals("1"), toFrom[0], toFrom[1]));
+                    } else {
+                        throw new DukeException(2);
+                    }
+                }
+            }
+            FileWriter dataWriter = new FileWriter(data);
             while (command != Command.BYE) {
                 String msg;
                 Task task;
@@ -163,7 +201,15 @@ public class Jaiden {
                 input = scanner.nextLine();
                 command = toCommand(input);
             }
+            String msg = "";
+            for (Task task : tasks) {
+                msg += task.save() + "\n";
+            }
+            dataWriter.write(msg);
+            dataWriter.close();
         } catch (DukeException e) {
+            System.out.println(e);
+        } catch (IOException e) {
             System.out.println(e);
         } finally {
             System.out.println(exit);
