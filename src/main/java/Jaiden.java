@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Jaiden {
     private Storage storage;
@@ -29,14 +28,21 @@ public class Jaiden {
 
     public void run() {
         ui.greet();
+        ArrayList<String> input = new ArrayList<>();;
+        Command command;
         try {
-            ArrayList<String> input = parser.read();
-            Command command = parser.parseCommand(input.get(0));
-            while (command != Command.BYE) {
-                String msg;
-                Task task;
-                String description;
-                int index;
+            input = parser.read();
+            command = parser.parseCommand(input.get(0));
+        } catch (DukeException e) {
+            ui.showEmptyError(e.field, e.task);
+            command = Command.DEFAULT;
+        }
+        while (command != Command.BYE) {
+            String msg;
+            Task task;
+            String description;
+            int index;
+            try {
                 switch (command) {
                     case LIST:
                         msg = "    ____________________________________________________________\n"
@@ -126,17 +132,23 @@ public class Jaiden {
                         ui.print(msg);
                         break;
                     case UNKNOWN:
-                        throw new DukeException(1);
+                        throw new DukeException();
+                    default:
+                        break;
                 }
+            } catch (DukeException e) {
+                ui.showCommandError();
+            }
+            try {
                 input = parser.read();
                 command = parser.parseCommand(input.get(0));
+            } catch (DukeException e) {
+                ui.showEmptyError(e.field, e.task);
+                command = Command.DEFAULT;
             }
-        } catch (DukeException e) {
-            ui.print(e.toString());
-        } finally {
-            storage.save(tasks);
-            ui.exit();
         }
+        storage.save(tasks);
+        ui.exit();
     }
 
     public static void main(String[] args) {

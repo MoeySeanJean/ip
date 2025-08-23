@@ -8,7 +8,8 @@ public enum Command {
     DELETE,
     SHOW,
     BYE,
-    UNKNOWN;
+    UNKNOWN,
+    DEFAULT;
 
     public static Command toCommand(String command) {
         if (command.equals("list")) {

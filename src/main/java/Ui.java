@@ -24,4 +24,18 @@ public class Ui {
                 + "    ____________________________________________________________\n";
         System.out.println(msg);
     }
+
+    public void showEmptyError(String field, String task) {
+        String msg = "    ____________________________________________________________\n"
+                + "     OOPS!!! The " + field + " of a " + task + " cannot be empty.\n"
+                + "    ____________________________________________________________\n";
+        System.out.println(msg);
+    }
+
+    public void showCommandError() {
+        String msg = "    ____________________________________________________________\n"
+                + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "    ____________________________________________________________\n";
+        System.out.println(msg);
+    }
 }

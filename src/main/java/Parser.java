@@ -12,37 +12,35 @@ public class Parser {
         Command command = Command.toCommand(inputCommand);
         String description;
         switch(command) {
-            case LIST:
-                break;
             case MARK:
                 if (input.split(" ").length < 2) {
-                    throw new DukeException(0, "index", "mark");
+                    throw new DukeException("index", "mark");
                 }
                 list.add(input.split(" ")[1]);
                 break;
             case UNMARK:
                 if (input.split(" ").length < 2) {
-                    throw new DukeException(0, "index", "unmark");
+                    throw new DukeException("index", "unmark");
                 }
                 list.add(input.split(" ")[1]);
                 break;
             case TODO:
                 if (input.length() < 6 || input.substring(5).isBlank()) {
-                    throw new DukeException(0, "description", "todo");
+                    throw new DukeException("description", "todo");
                 }
                 list.add(input.substring(5));
                 break;
             case DEADLINE:
                 int byIndex = input.contains("/by") ? input.indexOf("/by") : input.length();
                 if (input.length() < 10 || input.substring(9, byIndex).isBlank()) {
-                    throw new DukeException(0, "description", "deadline");
+                    throw new DukeException("description", "deadline");
                 } else if (!input.contains("/by") || input.indexOf("/by") + 4 >= input.length()) {
-                    throw new DukeException(0, "by", "deadline");
+                    throw new DukeException("by", "deadline");
                 }
                 description = input.substring(9, input.indexOf("/by") - 1);
                 String by = input.substring(input.indexOf("/by") + 4);
                 if (by.isBlank()) {
-                    throw new DukeException(0, "by", "deadline");
+                    throw new DukeException("by", "deadline");
                 }
                 list.add(description);
                 list.add(by);
@@ -52,20 +50,20 @@ public class Parser {
                 int toIndex = input.contains("/to") ? input.indexOf("/to") : input.length();
                 int descriptionEndIndex = Math.min(fromIndex, toIndex);
                 if (input.length() < 7 || input.substring(6, descriptionEndIndex).isBlank()) {
-                    throw new DukeException(0, "description", "event");
+                    throw new DukeException("description", "event");
                 } else if (!input.contains("/from") || input.indexOf("/from") + 6 >= toIndex) {
-                    throw new DukeException(0, "from", "event");
+                    throw new DukeException("from", "event");
                 } else if (!input.contains("/to") || input.indexOf("/to") + 4 >= input.length()) {
-                    throw new DukeException(0, "to", "event");
+                    throw new DukeException("to", "event");
                 }
                 description = input.substring(6, input.indexOf("/from") - 1);
                 String from = input.substring(input.indexOf("/from") + 6, input.indexOf("/to") - 1);
                 if (from.isBlank()) {
-                    throw new DukeException(0, "from", "event");
+                    throw new DukeException("from", "event");
                 }
                 String to = input.substring(input.indexOf("/to") + 4);
                 if (to.isBlank()) {
-                    throw new DukeException(0, "to", "event");
+                    throw new DukeException("to", "event");
                 }
                 list.add(description);
                 list.add(from);
@@ -73,15 +71,17 @@ public class Parser {
                 break;
             case DELETE:
                 if (input.length() < 8 || input.substring(7).isBlank()) {
-                    throw new DukeException(0, "index", "delete");
+                    throw new DukeException("index", "delete");
                 }
                 list.add(input.split(" ")[1]);
                 break;
             case SHOW:
                 if (input.length() < 6 || input.substring(5).isBlank()) {
-                    throw new DukeException(0, "date", "show");
+                    throw new DukeException("date", "show");
                 }
                 list.add(input.substring(5));
+                break;
+            default:
                 break;
         }
         return list;
