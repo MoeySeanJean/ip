@@ -1,19 +1,22 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jaiden {
-    // private Storage storage;
-    // private TaskList tasks;
+    private Storage storage;
+    private ArrayList<Task> tasks;
     private Ui ui;
 
     public Jaiden(String filePath) {
         ui = new Ui();
-        // storage = new Storage(filePath);
+        storage = new Storage(filePath);
+        try {
+            tasks = storage.load();
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new ArrayList<Task>();
+        }
 //        try {
 //            tasks = new TaskList(storage.load());
 //        } catch (DukeException e) {
@@ -25,42 +28,9 @@ public class Jaiden {
     public void run() {
         ui.greet();
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
         String input = scanner.nextLine();
         Command command = Command.toCommand(input);
-        File data = new File("./data/jaiden.txt");
-        FileWriter dataWriter = null;
         try {
-            if (!data.exists()) {
-                new File("./data").mkdir();
-            } else {
-                Scanner dataReader = new Scanner(data);
-                while (dataReader.hasNextLine()) {
-                    String line = dataReader.nextLine();
-                    String[] temp = line.split(" \\| ");
-                    if (temp.length == 0) {
-                        throw new DukeException(2);
-                    } else if (temp[0].equals("T")) {
-                        if (temp.length != 3 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank()) {
-                            throw new DukeException(2);
-                        }
-                        tasks.add(new Todo(temp[2], temp[1].equals("1")));
-                    } else if (temp[0].equals("D")) {
-                        if (temp.length != 4 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank() || temp[3].isBlank()) {
-                            throw new DukeException(2);
-                        }
-                        tasks.add(new Deadline(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3])));
-                    } else if (temp[0].equals("E")) {
-                        if (temp.length != 5 || !(temp[1].equals("0") || temp[1].equals("1"))  || temp[2].isBlank() || temp[3].isBlank() || temp[4].isBlank()) {
-                            throw new DukeException(2);
-                        }
-                        tasks.add(new Event(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3]), LocalDate.parse(temp[4])));
-                    } else {
-                        throw new DukeException(2);
-                    }
-                }
-            }
-            dataWriter = new FileWriter(data);
             while (command != Command.BYE) {
                 String msg;
                 Task task;
@@ -211,22 +181,10 @@ public class Jaiden {
             }
         } catch (DukeException e) {
             ui.print(e.toString());
-        } catch (IOException e) {
-            System.out.println(e);
         } finally {
-            String msg = "";
-            for (Task task : tasks) {
-                msg += task.save() + "\n";
-            }
-            try {
-                dataWriter.write(msg);
-                dataWriter.close();
-            } catch (IOException e) {
-                System.out.println(e);
-            } finally {
-                scanner.close();
-                ui.exit();
-            }
+            storage.save(tasks);
+            scanner.close();
+            ui.exit();
         }
     }
 
