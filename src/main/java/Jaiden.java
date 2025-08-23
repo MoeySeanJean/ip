@@ -7,56 +7,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jaiden {
-    public enum Command {
-        LIST,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE,
-        SHOW,
-        BYE,
-        UNKNOWN
+    // private Storage storage;
+    // private TaskList tasks;
+    private Ui ui;
+
+    public Jaiden(String filePath) {
+        ui = new Ui();
+        // storage = new Storage(filePath);
+//        try {
+//            tasks = new TaskList(storage.load());
+//        } catch (DukeException e) {
+//            ui.showLoadingError();
+//            tasks = new TaskList();
+//        }
     }
 
-    public static Command toCommand(String command) {
-        if (command.equals("list")) {
-            return Command.LIST;
-        } else if (command.startsWith("mark")) {
-            return Command.MARK;
-        } else if (command.startsWith("unmark")) {
-            return Command.UNMARK;
-        } else if (command.startsWith("todo")) {
-            return Command.TODO;
-        } else if (command.startsWith("deadline")) {
-            return Command.DEADLINE;
-        } else if (command.startsWith("event")) {
-            return Command.EVENT;
-        } else if (command.startsWith("delete")) {
-            return Command.DELETE;
-        } else if (command.startsWith("show")) {
-            return Command.SHOW;
-        } else if (command.equals("bye")) {
-            return Command.BYE;
-        } else {
-            return Command.UNKNOWN;
-        }
-    }
-
-    public static void main(String[] args) {
+    public void run() {
+        ui.greet();
         Scanner scanner = new Scanner(System.in);
-        String greet = "    ____________________________________________________________\n"
-                + "     Hello! I'm Jaiden\n"
-                + "     What can I do for you?\n"
-                + "    ____________________________________________________________\n";
-        String exit = "    ____________________________________________________________\n"
-                + "     Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________\n";
         ArrayList<Task> tasks = new ArrayList<Task>();
-        System.out.println(greet);
         String input = scanner.nextLine();
-        Command command = toCommand(input);
+        Command command = Command.toCommand(input);
         File data = new File("./data/jaiden.txt");
         FileWriter dataWriter = null;
         try {
@@ -103,7 +74,7 @@ public class Jaiden {
                             msg += "     " + (i + 1) + "." + tasks.get(i).toString() + "\n";
                         }
                         msg += "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case MARK:
                         if (input.split(" ").length < 2) {
@@ -115,7 +86,7 @@ public class Jaiden {
                                 + "     Nice! I've marked this task as done:\n"
                                 + "       " + tasks.get(markIndex).toString() + "\n"
                                 + "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case UNMARK:
                         if (input.split(" ").length < 2) {
@@ -127,7 +98,7 @@ public class Jaiden {
                                 + "     OK, I've marked this task as not done yet:\n"
                                 + "       " + tasks.get(markIndex).toString() + "\n"
                                 + "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case TODO:
                         if (input.length() < 6 || input.substring(5).isBlank()) {
@@ -141,7 +112,7 @@ public class Jaiden {
                                 + "       " + task.toString() + "\n"
                                 + "     Now you have " + tasks.size() + " tasks in the list.\n"
                                 + "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case DEADLINE:
                         int byIndex = input.contains("/by") ? input.indexOf("/by") : input.length();
@@ -163,7 +134,7 @@ public class Jaiden {
                                 + "       " + task.toString() + "\n"
                                 + "     Now you have " + tasks.size() + " tasks in the list.\n"
                                 + "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case EVENT:
                         int fromIndex = input.contains("/from") ? input.indexOf("/from") : input.length();
@@ -194,7 +165,7 @@ public class Jaiden {
                                 + "       " + task.toString() + "\n"
                                 + "     Now you have " + tasks.size() + " tasks in the list.\n"
                                 + "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case DELETE:
                         if (input.length() < 8 || input.substring(7).isBlank()) {
@@ -207,7 +178,7 @@ public class Jaiden {
                                 + "       " + task.toString() + "\n"
                                 + "     Now you have " + tasks.size() + " tasks in the list.\n"
                                 + "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case SHOW:
                         if (input.length() < 6 || input.substring(5).isBlank()) {
@@ -230,16 +201,16 @@ public class Jaiden {
                             }
                         }
                         msg += "    ____________________________________________________________\n";
-                        System.out.println(msg);
+                        ui.print(msg);
                         break;
                     case UNKNOWN:
                         throw new DukeException(1);
                 }
                 input = scanner.nextLine();
-                command = toCommand(input);
+                command = Command.toCommand(input);
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            ui.print(e.toString());
         } catch (IOException e) {
             System.out.println(e);
         } finally {
@@ -253,9 +224,13 @@ public class Jaiden {
             } catch (IOException e) {
                 System.out.println(e);
             } finally {
-                System.out.println(exit);
                 scanner.close();
+                ui.exit();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Jaiden("data/tasks.txt").run();
     }
 }
