@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -16,6 +16,10 @@ public class Deadline extends Task {
 
     public String save() {
         return "D | " + super.save() + " | " + by;
+    }
+
+    public boolean isBy(LocalDate d) {
+        return d.isBefore(by) || d.isEqual(by);
     }
 
     @Override

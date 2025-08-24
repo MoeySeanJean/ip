@@ -2,8 +2,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDate from;
-    protected LocalDate to;
+    private LocalDate from;
+    private LocalDate to;
 
     public Event(String description, LocalDate from, LocalDate to) {
         super(description);
@@ -19,6 +19,10 @@ public class Event extends Task {
 
     public String save() {
         return "E | " + super.save() + " | " + from + " | " + to;
+    }
+
+    public boolean isBetween(LocalDate d) {
+        return (from.isBefore(d) || from.isEqual(d)) && (to.isAfter(d) || to.isEqual(d));
     }
 
     @Override

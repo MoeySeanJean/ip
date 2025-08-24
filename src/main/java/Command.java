@@ -1,37 +1,14 @@
-public enum Command {
-    LIST,
-    MARK,
-    UNMARK,
-    TODO,
-    DEADLINE,
-    EVENT,
-    DELETE,
-    SHOW,
-    BYE,
-    UNKNOWN,
-    DEFAULT;
+public abstract class Command {
+    protected String[] commands;
+    protected boolean isExit;
 
-    public static Command toCommand(String command) {
-        if (command.equals("list")) {
-            return Command.LIST;
-        } else if (command.startsWith("mark")) {
-            return Command.MARK;
-        } else if (command.startsWith("unmark")) {
-            return Command.UNMARK;
-        } else if (command.startsWith("todo")) {
-            return Command.TODO;
-        } else if (command.startsWith("deadline")) {
-            return Command.DEADLINE;
-        } else if (command.startsWith("event")) {
-            return Command.EVENT;
-        } else if (command.startsWith("delete")) {
-            return Command.DELETE;
-        } else if (command.startsWith("show")) {
-            return Command.SHOW;
-        } else if (command.equals("bye")) {
-            return Command.BYE;
-        } else {
-            return Command.UNKNOWN;
-        }
+    public Command(String[] commands) {
+        this.commands = commands;
     }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 }

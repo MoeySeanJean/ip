@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    protected File data;
+    private File data;
 
     public Storage(String filePath) {
         this.data = new File(filePath);

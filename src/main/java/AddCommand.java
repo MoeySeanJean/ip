@@ -1,0 +1,26 @@
+import java.time.LocalDate;
+
+public class AddCommand extends Command {
+    public AddCommand(String[] commands) {
+        super(commands);
+        this.isExit = false;
+    }
+
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        String description = commands[1];
+        Task task;
+        if (commands[0].equals("todo")) {
+            task = new Todo(description);
+        } else if (commands[0].equals("deadline")) {
+            LocalDate by = LocalDate.parse(commands[3]);
+            task = new Deadline(description, by);
+        } else {
+            LocalDate from = LocalDate.parse(commands[3]);
+            LocalDate to = LocalDate.parse(commands[5]);
+            task = new Event(description, from, to);
+        }
+        String msg = taskList.add(task);
+        ui.show(msg);
+        storage.save(taskList);
+    }
+}

@@ -1,11 +1,13 @@
 public class DukeException extends Exception {
-    protected String field;
-    protected String task;
+    private String message;
 
     public DukeException() {}
 
-    public DukeException(String field, String task) {
-        this.field = field;
-        this.task = task;
+    public DukeException(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
