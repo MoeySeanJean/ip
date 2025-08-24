@@ -1,3 +1,9 @@
+package jaiden.command;
+
+import jaiden.storage.Storage;
+import jaiden.task.TaskList;
+import jaiden.ui.Ui;
+
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] commands) {
         super(commands);

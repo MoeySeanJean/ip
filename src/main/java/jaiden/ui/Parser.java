@@ -1,3 +1,7 @@
+package jaiden.ui;
+
+import jaiden.command.*;
+
 public class Parser {
     public Command parse(String command) {
         String[] commands = command.split(" ");

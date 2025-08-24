@@ -1,3 +1,9 @@
+package jaiden.command;
+
+import jaiden.storage.Storage;
+import jaiden.task.TaskList;
+import jaiden.ui.Ui;
+
 public class ExitCommand extends Command {
     public ExitCommand(String[] commands) {
         super(commands);

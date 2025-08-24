@@ -1,3 +1,9 @@
+package jaiden.command;
+
+import jaiden.storage.Storage;
+import jaiden.task.TaskList;
+import jaiden.ui.Ui;
+
 public class UnknownCommand extends Command {
     public UnknownCommand(String[] commands) {
         super(commands);

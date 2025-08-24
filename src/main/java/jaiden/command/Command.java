@@ -1,3 +1,9 @@
+package jaiden.command;
+
+import jaiden.storage.Storage;
+import jaiden.task.TaskList;
+import jaiden.ui.Ui;
+
 public abstract class Command {
     protected String[] commands;
     protected boolean isExit;

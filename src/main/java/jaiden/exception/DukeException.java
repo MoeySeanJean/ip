@@ -1,3 +1,5 @@
+package jaiden.exception;
+
 public class DukeException extends Exception {
     private String message;
 

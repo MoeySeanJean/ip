@@ -1,3 +1,7 @@
+package jaiden.ui;
+
+import jaiden.exception.DukeException;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -6,7 +10,7 @@ public class Ui {
                 + "     Hello! I'm Jaiden\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
-        System.out.println(msg);
+        System.out.print(msg);
     }
 
     public String readCommand() throws DukeException {
@@ -89,7 +93,7 @@ public class Ui {
         String msg = "    ____________________________________________________________\n"
                 + "     The data file is corrupted (Content not in the expected format).\n"
                 + "    ____________________________________________________________\n";
-        System.out.println(msg);
+        System.out.print(msg);
     }
 
     public void showError(String msg) {

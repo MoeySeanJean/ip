@@ -1,3 +1,13 @@
+package jaiden.command;
+
+import jaiden.task.Deadline;
+import jaiden.task.Event;
+import jaiden.task.Task;
+import jaiden.task.Todo;
+import jaiden.storage.Storage;
+import jaiden.task.TaskList;
+import jaiden.ui.Ui;
+
 import java.time.LocalDate;
 
 public class AddCommand extends Command {

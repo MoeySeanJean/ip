@@ -1,3 +1,10 @@
+package jaiden.ui;
+
+import jaiden.command.Command;
+import jaiden.exception.DukeException;
+import jaiden.storage.Storage;
+import jaiden.task.TaskList;
+
 public class Jaiden {
     private Storage storage;
     private TaskList tasks;
