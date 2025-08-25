@@ -51,6 +51,10 @@ public class Task {
         isDone = false;
     }
 
+    public boolean hasText(String text) {
+        return description.contains(text);
+    }
+
     /**
      * Convert task to string to be saved
      *
