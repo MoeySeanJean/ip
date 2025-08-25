@@ -4,7 +4,13 @@ import jaiden.exception.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Class to handle ui input and output.
+ */
 public class Ui {
+    /**
+     * Show welcome message.
+     */
     public void showWelcome() {
         String msg = "    ____________________________________________________________\n"
                 + "     Hello! I'm Jaiden\n"
@@ -13,6 +19,12 @@ public class Ui {
         System.out.print(msg);
     }
 
+    /**
+     * Read user input from terminal.
+     *
+     * @return User input.
+     * @throws DukeException If input is invalid.
+     */
     public String readCommand() throws DukeException {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -81,14 +93,25 @@ public class Ui {
         return input;
     }
 
+    /**
+     * Show separator line.
+     */
     public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Show message.
+     *
+     * @param msg Message.
+     */
     public void show(String msg) {
         System.out.print(msg);
     }
 
+    /**
+     * Show loading error message.
+     */
     public void showLoadingError() {
         String msg = "    ____________________________________________________________\n"
                 + "     The data file is corrupted (Content not in the expected format).\n"
@@ -96,6 +119,11 @@ public class Ui {
         System.out.print(msg);
     }
 
+    /**
+     * Show error message.
+     *
+     * @param msg Message.
+     */
     public void showError(String msg) {
         showLine();
         System.out.println("     " + msg);

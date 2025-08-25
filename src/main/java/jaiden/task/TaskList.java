@@ -4,17 +4,33 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Class for task list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for empty task list.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for non-empty task list.
+     *
+     * @param tasks List of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Show a list of tasks in the task list.
+     *
+     * @return Message to be shown.
+     */
     public String list() {
         String msg = "     Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
@@ -23,6 +39,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Mark a task as done.
+     *
+     * @param index Index of task to be marked (0-indexed).
+     * @return Message to be shown.
+     */
     public String mark(int index) {
         tasks.get(index).markAsDone();
         String msg = "     Nice! I've marked this task as done:\n"
@@ -30,6 +52,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Unmark a task as done.
+     *
+     * @param index Index of task to be unmarked (0-indexed).
+     * @return Message to be shown.
+     */
     public String unmark(int index) {
         tasks.get(index).markAsNotDone();
         String msg = "     OK, I've marked this task as not done yet:\n"
@@ -37,6 +65,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Add task to task list.
+     *
+     * @param task Task to be added.
+     * @return Message to be shown.
+     */
     public String add(Task task) {
         tasks.add(task);
         String msg = "     Got it. I've added this task:\n"
@@ -45,6 +79,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Remove task from task list.
+     *
+     * @param index Index of task to be removed (0-indexed).
+     * @return Message to be shown.
+     */
     public String remove(int index) {
         Task task = tasks.remove(index);
         String msg = "     Noted. I've removed this task:\n"
@@ -54,6 +94,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Show a list of tasks on a date.
+     *
+     * @param showDate Date.
+     * @return Message to be shown.
+     */
     public String show(LocalDate showDate) {
         String msg = "     Here are the tasks on " + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
@@ -73,6 +119,11 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Convert task list to string to be saved.
+     *
+     * @return String representation to be saved.
+     */
     public String save() {
         String msg = "";
         for (Task task : tasks) {
@@ -81,6 +132,9 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

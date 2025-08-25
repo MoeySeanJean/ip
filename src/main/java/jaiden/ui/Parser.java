@@ -2,7 +2,16 @@ package jaiden.ui;
 
 import jaiden.command.*;
 
+/**
+ * Class to parse user input into executable command.
+ */
 public class Parser {
+    /**
+     * Parse user input into executable command.
+     *
+     * @param command User input.
+     * @return Corresponding command.
+     */
     public Command parse(String command) {
         String[] commands = command.split(" ");
         switch (commands[0]) {

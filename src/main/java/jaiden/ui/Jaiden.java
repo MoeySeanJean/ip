@@ -5,13 +5,21 @@ import jaiden.exception.DukeException;
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 
+/**
+ * Main class for Jaiden
+ */
 public class Jaiden {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
-    public Jaiden(String filePath) {
+    /**
+     * Constructor for Jaiden.
+     *
+     * @param filePath File path to save data in txt format.
+     */
+    private Jaiden(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
@@ -23,7 +31,10 @@ public class Jaiden {
         }
     }
 
-    public void run() {
+    /**
+     * Main logic flow.
+     */
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -41,6 +52,11 @@ public class Jaiden {
         }
     }
 
+    /**
+     * Entry point.
+     *
+     * @param args Arguments.
+     */
     public static void main(String[] args) {
         new Jaiden("data/tasks.txt").run();
     }
