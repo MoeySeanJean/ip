@@ -1,10 +1,10 @@
 package jaiden.command;
 
+import java.time.LocalDate;
+
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 import jaiden.ui.Ui;
-
-import java.time.LocalDate;
 
 public class ListCommand extends Command {
     public ListCommand(String[] commands) {
