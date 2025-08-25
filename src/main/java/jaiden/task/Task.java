@@ -26,6 +26,10 @@ public class Task {
         isDone = false;
     }
 
+    public boolean hasText(String text) {
+        return description.contains(text);
+    }
+
     public String save() {
         return (isDone ? "1" : "0") + " | " + description;
     }

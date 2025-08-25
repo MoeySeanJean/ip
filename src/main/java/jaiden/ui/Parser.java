@@ -18,6 +18,8 @@ public class Parser {
                 return new AddCommand(commands);
             case "delete":
                 return new DeleteCommand(commands);
+            case "find":
+                return new FindCommand(commands);
             case "bye":
                 return new ExitCommand(commands);
             default:

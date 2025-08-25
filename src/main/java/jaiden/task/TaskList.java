@@ -61,13 +61,24 @@ public class TaskList {
             if (t.getClass() == Deadline.class) {
                 Deadline d = (Deadline) t;
                 if (d.isBy(showDate)) {
-                    msg += "     " + (i + 1) + "." + tasks.get(i).toString() + "\n";
+                    msg += "     " + (i + 1) + "." + t.toString() + "\n";
                 }
             } else if (t.getClass() == Event.class) {
                 Event e = (Event) t;
                 if (e.isBetween(showDate)) {
-                    msg += "     " + (i + 1) + "." + tasks.get(i).toString() + "\n";
+                    msg += "     " + (i + 1) + "." + t.toString() + "\n";
                 }
+            }
+        }
+        return msg;
+    }
+
+    public String find(String text) {
+        String msg = "     Here are the matching tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.hasText(text)) {
+                msg += "     " + (i + 1) + "." + t.toString() + "\n";
             }
         }
         return msg;

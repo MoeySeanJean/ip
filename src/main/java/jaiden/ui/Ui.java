@@ -75,6 +75,11 @@ public class Ui {
                     throw new DukeException("OOPS!!! The date of a show cannot be empty.");
                 }
                 break;
+            case "find":
+                if (input.length() < 6 || input.substring(5).isBlank()) {
+                    throw new DukeException("OOPS!!! The text of a find cannot be empty.");
+                }
+                break;
             default:
                 break;
         }
