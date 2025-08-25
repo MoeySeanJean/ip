@@ -10,12 +10,23 @@ import jaiden.ui.Ui;
 
 import java.time.LocalDate;
 
+/**
+ * Class for add command.
+ */
 public class AddCommand extends Command {
+    /**
+     * Constructor for add command.
+     *
+     * @param commands User input.
+     */
     public AddCommand(String[] commands) {
         super(commands);
         this.isExit = false;
     }
 
+    /**
+     * @inheritDoc
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String description = commands[1];
         Task task;

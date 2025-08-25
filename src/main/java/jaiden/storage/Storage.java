@@ -11,13 +11,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class for storage.
+ */
 public class Storage {
     private File data;
 
+    /**
+     * Constructor for storage.
+     *
+     * @param filePath File path to save data in txt format.
+     */
     public Storage(String filePath) {
         this.data = new File(filePath);
     }
 
+
+    /**
+     * Load data from local storage.
+     *
+     * @return List of tasks.
+     * @throws DukeException If invalid format from local storage.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner dataReader;
@@ -57,6 +72,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Write to local storage.
+     *
+     * @param tasks Task list to be saved.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter dataWriter = new FileWriter(data);
