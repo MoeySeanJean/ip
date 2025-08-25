@@ -1,8 +1,5 @@
 package jaiden.storage;
 
-import jaiden.exception.DukeException;
-import jaiden.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +7,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import jaiden.exception.DukeException;
+import jaiden.task.Deadline;
+import jaiden.task.Event;
+import jaiden.task.Task;
+import jaiden.task.TaskList;
+import jaiden.task.Todo;
 
 /**
  * Class for storage.

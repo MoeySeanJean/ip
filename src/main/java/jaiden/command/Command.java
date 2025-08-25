@@ -1,10 +1,10 @@
 package jaiden.command;
 
+import java.util.Arrays;
+
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 import jaiden.ui.Ui;
-
-import java.util.Arrays;
 
 /**
  * Class for command.
