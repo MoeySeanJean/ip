@@ -80,4 +80,15 @@ public class TaskList {
         }
         return msg;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof TaskList other)) {
+            return false;
+        }
+        return tasks.equals(other.tasks);
+    }
 }

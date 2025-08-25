@@ -34,4 +34,15 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Task other)) {
+            return false;
+        }
+        return description.equals(other.description) && isDone == other.isDone;
+    }
 }
