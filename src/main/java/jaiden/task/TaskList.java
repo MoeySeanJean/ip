@@ -119,6 +119,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Find the tasks that contain the text.
+     *
+     * @param text Text to find for.
+     * @return Message to be shown.
+     */
     public String find(String text) {
         String msg = "     Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {

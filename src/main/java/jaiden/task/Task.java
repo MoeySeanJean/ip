@@ -51,6 +51,12 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Check if task contains the specified text.
+     *
+     * @param text Text to check for.
+     * @return True if contains text.
+     */
     public boolean hasText(String text) {
         return description.contains(text);
     }
