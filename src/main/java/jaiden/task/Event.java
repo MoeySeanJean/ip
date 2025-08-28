@@ -38,7 +38,7 @@ public class Event extends Task {
     }
 
     /**
-     * Check if the date is between the task start date and end date.
+     * Checks if the date is between the task start date and end date.
      *
      * @param d Date.
      * @return True if the date is between the task start date and end date.

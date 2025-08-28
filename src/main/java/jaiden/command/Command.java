@@ -23,7 +23,7 @@ public abstract class Command {
     }
 
     /**
-     * Check if command is exit command.
+     * Checks if command is exit command.
      *
      * @return Exit status.
      */
@@ -32,7 +32,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute command.
+     * Executes command.
      *
      * @param taskList Task list.
      * @param ui Ui to show command outputs.

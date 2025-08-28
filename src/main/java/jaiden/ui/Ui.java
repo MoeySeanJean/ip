@@ -9,7 +9,7 @@ import jaiden.exception.DukeException;
  */
 public class Ui {
     /**
-     * Show welcome message.
+     * Shows welcome message.
      */
     public void showWelcome() {
         String msg = "    ____________________________________________________________\n"
@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Read user input from terminal.
+     * Reads user input from terminal.
      *
      * @return User input.
      * @throws DukeException If input is invalid.
@@ -99,14 +99,14 @@ public class Ui {
     }
 
     /**
-     * Show separator line.
+     * Shows separator line.
      */
     public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
     /**
-     * Show message.
+     * Shows message.
      *
      * @param msg Message.
      */
@@ -115,7 +115,7 @@ public class Ui {
     }
 
     /**
-     * Show loading error message.
+     * Shows loading error message.
      */
     public void showLoadingError() {
         String msg = "    ____________________________________________________________\n"
@@ -125,7 +125,7 @@ public class Ui {
     }
 
     /**
-     * Show error message.
+     * Shows error message.
      *
      * @param msg Message.
      */

@@ -33,7 +33,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Check if the date is before the task due date.
+     * Checks if the date is before the task due date.
      *
      * @param d Date.
      * @return True if the date is before the task due date.

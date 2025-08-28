@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Show a list of tasks in the task list.
+     * Shows a list of tasks in the task list.
      *
      * @return Message to be shown.
      */
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      *
      * @param index Index of task to be marked (0-indexed).
      * @return Message to be shown.
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark a task as done.
+     * Unmarks a task as done.
      *
      * @param index Index of task to be unmarked (0-indexed).
      * @return Message to be shown.
@@ -66,7 +66,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to task list.
+     * Adds task to task list.
      *
      * @param task Task to be added.
      * @return Message to be shown.
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * Remove task from task list.
+     * Removes task from task list.
      *
      * @param index Index of task to be removed (0-indexed).
      * @return Message to be shown.
@@ -95,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Show a list of tasks on a date.
+     * Shows a list of tasks on a date.
      *
      * @param showDate Date.
      * @return Message to be shown.
@@ -120,7 +120,7 @@ public class TaskList {
     }
 
     /**
-     * Find the tasks that contain the text.
+     * Finds the tasks that contain the text.
      *
      * @param text Text to find for.
      * @return Message to be shown.
@@ -137,7 +137,7 @@ public class TaskList {
     }
 
     /**
-     * Convert task list to string to be saved.
+     * Converts task list to string to be saved.
      *
      * @return String representation to be saved.
      */

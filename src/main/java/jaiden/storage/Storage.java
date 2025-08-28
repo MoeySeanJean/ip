@@ -32,7 +32,7 @@ public class Storage {
 
 
     /**
-     * Load data from local storage.
+     * Loads data from local storage.
      *
      * @return List of tasks.
      * @throws DukeException If invalid format from local storage.
@@ -77,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Write to local storage.
+     * Writes to local storage.
      *
      * @param tasks Task list to be saved.
      */

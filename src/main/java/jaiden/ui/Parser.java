@@ -14,7 +14,7 @@ import jaiden.command.UnknownCommand;
  */
 public class Parser {
     /**
-     * Parse user input into executable command.
+     * Parses user input into executable command.
      *
      * @param command User input.
      * @return Corresponding command.

@@ -29,7 +29,7 @@ public class Task {
     }
 
     /**
-     * Get status icon of task.
+     * Gets status icon of task.
      *
      * @return Status icon.
      */
@@ -38,21 +38,21 @@ public class Task {
     }
 
     /**
-     * Mark task as done.
+     * Marks task as done.
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Mark task as not done.
+     * Marks task as not done.
      */
     public void markAsNotDone() {
         isDone = false;
     }
 
     /**
-     * Check if task contains the specified text.
+     * Checks if task contains the specified text.
      *
      * @param text Text to check for.
      * @return True if contains text.
@@ -62,7 +62,7 @@ public class Task {
     }
 
     /**
-     * Convert task to string to be saved
+     * Converts task to string to be saved
      *
      * @return String representation to be saved
      */
