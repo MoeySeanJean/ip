@@ -101,7 +101,8 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String show(LocalDate showDate) {
-        String msg = "     Here are the tasks on " + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n";
+        String msg = "     Here are the tasks on "
+                + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             if (t.getClass() == Deadline.class) {

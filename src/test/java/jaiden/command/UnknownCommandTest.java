@@ -1,11 +1,12 @@
 package jaiden.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 import jaiden.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UnknownCommandTest {
     @Test

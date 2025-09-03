@@ -59,15 +59,20 @@ public class Storage {
                     }
                     tasks.add(new Todo(temp[2], temp[1].equals("1")));
                 } else if (temp[0].equals("D")) {
-                    if (temp.length != 4 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank() || temp[3].isBlank()) {
+                    if (temp.length != 4
+                            || !(temp[1].equals("0") || temp[1].equals("1"))
+                                || temp[2].isBlank() || temp[3].isBlank()) {
                         throw new DukeException();
                     }
                     tasks.add(new Deadline(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3])));
                 } else if (temp[0].equals("E")) {
-                    if (temp.length != 5 || !(temp[1].equals("0") || temp[1].equals("1"))  || temp[2].isBlank() || temp[3].isBlank() || temp[4].isBlank()) {
+                    if (temp.length != 5
+                            || !(temp[1].equals("0") || temp[1].equals("1"))
+                                || temp[2].isBlank() || temp[3].isBlank() || temp[4].isBlank()) {
                         throw new DukeException();
                     }
-                    tasks.add(new Event(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3]), LocalDate.parse(temp[4])));
+                    tasks.add(new Event(temp[2], temp[1].equals("1"),
+                            LocalDate.parse(temp[3]), LocalDate.parse(temp[4])));
                 } else {
                     throw new DukeException();
                 }
