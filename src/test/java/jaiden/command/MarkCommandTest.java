@@ -1,15 +1,16 @@
 package jaiden.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import jaiden.storage.Storage;
 import jaiden.task.Task;
 import jaiden.task.TaskList;
 import jaiden.task.Todo;
 import jaiden.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MarkCommandTest {
     @Test

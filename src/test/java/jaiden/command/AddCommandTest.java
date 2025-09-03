@@ -1,13 +1,16 @@
 package jaiden.command;
 
-import jaiden.storage.Storage;
-import jaiden.task.*;
-import jaiden.ui.Ui;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import jaiden.storage.Storage;
+import jaiden.task.Task;
+import jaiden.task.TaskList;
+import jaiden.task.Todo;
+import jaiden.ui.Ui;
 
 public class AddCommandTest {
     @Test
