@@ -49,7 +49,8 @@ public class MainWindow extends AnchorPane {
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getJaidenDialog("Hello! I'm Jaiden\nWhat can I do for you?", this.jaidenImage, CommandType.NULLCOMMAND)
+                DialogBox.getJaidenDialog("Hello! I'm Jaiden\nWhat can I do for you?", this.jaidenImage,
+                        CommandType.NULLCOMMAND)
         );
     }
 

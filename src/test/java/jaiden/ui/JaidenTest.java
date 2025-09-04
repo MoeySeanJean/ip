@@ -7,6 +7,8 @@ import java.io.FileWriter;
 
 import org.junit.jupiter.api.Test;
 
+import jaiden.command.CommandType;
+
 public class JaidenTest {
     @Test
     public void getResponseTest() throws Exception {
@@ -61,26 +63,26 @@ public class JaidenTest {
     public void getCommandTypeTest() {
         Jaiden jaiden = new Jaiden("data/test.txt");
         jaiden.getResponse("todo read");
-        assertEquals("AddCommand", jaiden.getCommandType());
+        assertEquals(CommandType.ADDCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("deadline read /by 2025-08-22");
-        assertEquals("AddCommand", jaiden.getCommandType());
+        assertEquals(CommandType.ADDCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("event read /from 2025-08-22 /to 2025-08-22");
-        assertEquals("AddCommand", jaiden.getCommandType());
+        assertEquals(CommandType.ADDCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("list");
-        assertEquals("ListCommand", jaiden.getCommandType());
+        assertEquals(CommandType.LISTCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("show 2025-08-22");
-        assertEquals("ListCommand", jaiden.getCommandType());
+        assertEquals(CommandType.LISTCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("find read");
-        assertEquals("ListCommand", jaiden.getCommandType());
+        assertEquals(CommandType.LISTCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("mark 1");
-        assertEquals("ChangeMarkCommand", jaiden.getCommandType());
+        assertEquals(CommandType.CHANGEMARKCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("unmark 1");
-        assertEquals("ChangeMarkCommand", jaiden.getCommandType());
+        assertEquals(CommandType.CHANGEMARKCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("delete 1");
-        assertEquals("DeleteCommand", jaiden.getCommandType());
+        assertEquals(CommandType.DELETECOMMAND, jaiden.getCommandType());
         jaiden.getResponse("test");
-        assertEquals("UnknownCommand", jaiden.getCommandType());
+        assertEquals(CommandType.UNKNOWNCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("bye");
-        assertEquals("ExitCommand", jaiden.getCommandType());
+        assertEquals(CommandType.EXITCOMMAND, jaiden.getCommandType());
     }
 }
