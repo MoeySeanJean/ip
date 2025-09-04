@@ -31,7 +31,7 @@ public class DeleteCommandTest {
         TaskList test = new TaskList(tasks);
         Command command = new DeleteCommand(commands);
         command.execute(test, new Storage("data/test.txt"));
-        assertEquals("Noted. I've removed this task:\n[T][ ] test\nNow you have 0 tasks in the list.\n",
+        assertEquals("Noted. I've removed this task:\n[T][ ] test\nNow you have 0 tasks in the list.",
                 command.getString());
     }
 

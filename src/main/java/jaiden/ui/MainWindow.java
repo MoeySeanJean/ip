@@ -55,6 +55,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Shows loading error.
+     */
+    public void showLoadingError() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getJaidenDialog("The data file is corrupted (Content not in the expected format).",
+                        this.jaidenImage, CommandType.ERRORCOMMAND)
+        );
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Jaiden's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

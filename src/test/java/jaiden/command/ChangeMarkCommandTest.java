@@ -44,7 +44,7 @@ public class ChangeMarkCommandTest {
         TaskList test1 = new TaskList(tasks1);
         Command command1 = new ChangeMarkCommand(commands1);
         command1.execute(test1, new Storage("data/test.txt"));
-        assertEquals("Nice! I've marked this task as done:\n[T][X] test\n", command1.getString());
+        assertEquals("Nice! I've marked this task as done:\n[T][X] test", command1.getString());
 
         String[] commands2 = {"umark", "1"};
         ArrayList<Task> tasks2 = new ArrayList<>();
@@ -52,7 +52,7 @@ public class ChangeMarkCommandTest {
         TaskList test2 = new TaskList(tasks2);
         Command command2 = new ChangeMarkCommand(commands2);
         command2.execute(test2, new Storage("data/test.txt"));
-        assertEquals("OK, I've marked this task as not done yet:\n[T][ ] test\n", command2.getString());
+        assertEquals("OK, I've marked this task as not done yet:\n[T][ ] test", command2.getString());
     }
 
     @Test

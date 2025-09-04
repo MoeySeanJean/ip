@@ -9,17 +9,17 @@ import jaiden.task.TaskList;
  * Class for command.
  */
 public abstract class Command {
-    protected String[] commands;
+    protected String[] inputs;
     protected String string;
     protected CommandType commandType;
 
     /**
      * Constructor for command.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public Command(String[] commands) {
-        this.commands = commands;
+    public Command(String[] inputs) {
+        this.inputs = inputs;
     }
 
     /**
@@ -54,6 +54,6 @@ public abstract class Command {
         if (!(obj instanceof Command other)) {
             return false;
         }
-        return Arrays.equals(this.commands, other.commands);
+        return Arrays.equals(this.inputs, other.inputs);
     }
 }

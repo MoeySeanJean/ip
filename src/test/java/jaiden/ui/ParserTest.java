@@ -17,16 +17,16 @@ public class ParserTest {
     @Test
     public void parseTest_validFormat_success() throws Exception {
         assertEquals(new ListCommand(new String[]{"list"}), Parser.parse("list"));
-        assertEquals(new ListCommand(new String[]{"show", "2025-08-22"}), Parser.parse("show 2025-08-22"));
-        assertEquals(new ListCommand(new String[]{"find", "read"}), Parser.parse("find read"));
-        assertEquals(new ChangeMarkCommand(new String[]{"mark", "1"}), Parser.parse("mark 1"));
-        assertEquals(new ChangeMarkCommand(new String[]{"unmark", "1"}), Parser.parse("unmark 1"));
-        assertEquals(new AddCommand(new String[]{"todo", "test"}), Parser.parse("todo test"));
+        assertEquals(new ListCommand(new String[]{"show", "2025-08-22"}), Parser.parse("show", "2025-08-22"));
+        assertEquals(new ListCommand(new String[]{"find", "read"}), Parser.parse("find", "read"));
+        assertEquals(new ChangeMarkCommand(new String[]{"mark", "1"}), Parser.parse("mark", "1"));
+        assertEquals(new ChangeMarkCommand(new String[]{"unmark", "1"}), Parser.parse("unmark", "1"));
+        assertEquals(new AddCommand(new String[]{"todo", "test"}), Parser.parse("todo", "test"));
         assertEquals(new AddCommand(new String[]{"deadline", "test", "/by", "2025-08-22"}),
-                Parser.parse("deadline test /by 2025-08-22"));
+                Parser.parse("deadline", "test", "/by", "2025-08-22"));
         assertEquals(new AddCommand(new String[]{"event", "test", "/from", "2025-08-22", "/to", "2025-08-22"}),
-                Parser.parse("event test /from 2025-08-22 /to 2025-08-22"));
-        assertEquals(new DeleteCommand(new String[]{"delete", "1"}), Parser.parse("delete 1"));
+                Parser.parse("event", "test", "/from", "2025-08-22", "/to", "2025-08-22"));
+        assertEquals(new DeleteCommand(new String[]{"delete", "1"}), Parser.parse("delete", "1"));
         assertEquals(new ExitCommand(new String[]{"bye"}), Parser.parse("bye"));
         assertEquals(new UnknownCommand(new String[]{"test"}), Parser.parse("test"));
     }

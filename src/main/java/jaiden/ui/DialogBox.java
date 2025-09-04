@@ -77,7 +77,7 @@ public class DialogBox extends HBox {
         case EXITCOMMAND:
             this.dialog.getStyleClass().add("exit-label");
             break;
-        case UNKNOWNCOMMAND:
+        case ERRORCOMMAND:
             this.dialog.getStyleClass().add("error-label");
             break;
         default:
