@@ -46,7 +46,7 @@ public class AddCommandTest {
         TaskList test1 = new TaskList();
         Command command1 = new AddCommand(commands1);
         command1.execute(test1, new Storage("data/test.txt"));
-        assertEquals("Got it. I've added this task:\n[T][ ] test\nNow you have 1 tasks in the list.\n",
+        assertEquals("Got it. I've added this task:\n[T][ ] test\nNow you have 1 tasks in the list.",
                 command1.getString());
 
         String[] commands2 = {"deadline", "test", "/by", "2025-08-22"};
@@ -54,14 +54,14 @@ public class AddCommandTest {
         Command command2 = new AddCommand(commands2);
         command2.execute(test2, new Storage("data/test.txt"));
         assertEquals("Got it. I've added this task:\n[D][ ] test (by: Aug 22 2025)\n"
-                + "Now you have 1 tasks in the list.\n", command2.getString());
+                + "Now you have 1 tasks in the list.", command2.getString());
 
         String[] commands3 = {"event", "test", "/from", "2025-08-22", "/to", "2025-08-22"};
         TaskList test3 = new TaskList();
         Command command3 = new AddCommand(commands3);
         command3.execute(test3, new Storage("data/test.txt"));
         assertEquals("Got it. I've added this task:\n[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\n"
-                + "Now you have 1 tasks in the list.\n", command3.getString());
+                + "Now you have 1 tasks in the list.", command3.getString());
     }
 
     @Test

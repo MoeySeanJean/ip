@@ -16,10 +16,10 @@ public class AddCommand extends Command {
     /**
      * Constructor for add command.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public AddCommand(String[] commands) {
-        super(commands);
+    public AddCommand(String[] inputs) {
+        super(inputs);
         this.commandType = CommandType.ADDCOMMAND;
     }
 
@@ -27,16 +27,16 @@ public class AddCommand extends Command {
      * @inheritDoc
      */
     public void execute(TaskList taskList, Storage storage) {
-        String description = commands[1];
+        String description = inputs[1];
         Task task;
-        if (commands[0].equals("todo")) {
+        if (inputs[0].equals("todo")) {
             task = new Todo(description);
-        } else if (commands[0].equals("deadline")) {
-            LocalDate by = LocalDate.parse(commands[3]);
+        } else if (inputs[0].equals("deadline")) {
+            LocalDate by = LocalDate.parse(inputs[3]);
             task = new Deadline(description, by);
         } else {
-            LocalDate from = LocalDate.parse(commands[3]);
-            LocalDate to = LocalDate.parse(commands[5]);
+            LocalDate from = LocalDate.parse(inputs[3]);
+            LocalDate to = LocalDate.parse(inputs[5]);
             task = new Event(description, from, to);
         }
         this.string = taskList.add(task);

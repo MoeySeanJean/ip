@@ -10,10 +10,10 @@ public class ChangeMarkCommand extends Command {
     /**
      * Constructor for mark and unmark commands.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public ChangeMarkCommand(String[] commands) {
-        super(commands);
+    public ChangeMarkCommand(String[] inputs) {
+        super(inputs);
         this.commandType = CommandType.CHANGEMARKCOMMAND;
     }
 
@@ -21,8 +21,8 @@ public class ChangeMarkCommand extends Command {
      * @inheritDoc
      */
     public void execute(TaskList taskList, Storage storage) {
-        int index = Integer.parseInt(commands[1]) - 1;
-        if (commands[0].equals("mark")) {
+        int index = Integer.parseInt(inputs[1]) - 1;
+        if (inputs[0].equals("mark")) {
             this.string = taskList.mark(index);
         } else {
             this.string = taskList.unmark(index);

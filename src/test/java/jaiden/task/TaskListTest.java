@@ -28,11 +28,11 @@ public class TaskListTest {
         tasks.add(new Deadline("test", LocalDate.parse("2025-08-22")));
         tasks.add(new Event("test", LocalDate.parse("2025-08-22"), LocalDate.parse("2025-08-22")));
         TaskList test = new TaskList(tasks);
-        assertEquals("Nice! I've marked this task as done:\n[T][X] test\n", test.mark(0));
-        assertEquals("Nice! I've marked this task as done:\n[D][X] test (by: Aug 22 2025)\n",
+        assertEquals("Nice! I've marked this task as done:\n[T][X] test", test.mark(0));
+        assertEquals("Nice! I've marked this task as done:\n[D][X] test (by: Aug 22 2025)",
                 test.mark(1));
         assertEquals("Nice! I've marked this task as done:\n"
-                + "[E][X] test (from: Aug 22 2025 to: Aug 22 2025)\n", test.mark(2));
+                + "[E][X] test (from: Aug 22 2025 to: Aug 22 2025)", test.mark(2));
     }
 
     @Test
@@ -43,24 +43,24 @@ public class TaskListTest {
         tasks.add(new Event("test", true, LocalDate.parse("2025-08-22"),
                 LocalDate.parse("2025-08-22")));
         TaskList test = new TaskList(tasks);
-        assertEquals("OK, I've marked this task as not done yet:\n[T][ ] test\n",
+        assertEquals("OK, I've marked this task as not done yet:\n[T][ ] test",
                 test.unmark(0));
-        assertEquals("OK, I've marked this task as not done yet:\n[D][ ] test (by: Aug 22 2025)\n",
+        assertEquals("OK, I've marked this task as not done yet:\n[D][ ] test (by: Aug 22 2025)",
                 test.unmark(1));
         assertEquals("OK, I've marked this task as not done yet:\n"
-                + "[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\n", test.unmark(2));
+                + "[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)", test.unmark(2));
     }
 
     @Test
     public void addTest() {
         TaskList test = new TaskList();
         assertEquals("Got it. I've added this task:\n[T][ ] test\n"
-                + "Now you have 1 tasks in the list.\n", test.add(new Todo("test")));
+                + "Now you have 1 tasks in the list.", test.add(new Todo("test")));
         assertEquals("Got it. I've added this task:\n[D][ ] test (by: Aug 22 2025)\n"
-                + "Now you have 2 tasks in the list.\n",
+                + "Now you have 2 tasks in the list.",
                 test.add(new Deadline("test", LocalDate.parse("2025-08-22"))));
         assertEquals("Got it. I've added this task:\n"
-                + "[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\nNow you have 3 tasks in the list.\n",
+                + "[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\nNow you have 3 tasks in the list.",
                 test.add(new Event("test", LocalDate.parse("2025-08-22"), LocalDate.parse("2025-08-22"))));
     }
 
@@ -72,12 +72,12 @@ public class TaskListTest {
         tasks.add(new Event("test", LocalDate.parse("2025-08-22"), LocalDate.parse("2025-08-22")));
         TaskList test = new TaskList(tasks);
         assertEquals("Noted. I've removed this task:\n"
-                + "[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\nNow you have 2 tasks in the list.\n",
+                + "[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\nNow you have 2 tasks in the list.",
                 test.remove(2));
         assertEquals("Noted. I've removed this task:\n[D][ ] test (by: Aug 22 2025)\n"
-                + "Now you have 1 tasks in the list.\n", test.remove(1));
+                + "Now you have 1 tasks in the list.", test.remove(1));
         assertEquals("Noted. I've removed this task:\n[T][ ] test\n"
-                + "Now you have 0 tasks in the list.\n", test.remove(0));
+                + "Now you have 0 tasks in the list.", test.remove(0));
     }
 
     @Test

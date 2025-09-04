@@ -17,12 +17,12 @@ public class JaidenTest {
         testWriter.write("");
         testWriter.close();
         Jaiden jaiden = new Jaiden("data/test.txt");
-        assertEquals("Got it. I've added this task:\n[T][ ] read\nNow you have 1 tasks in the list.\n",
+        assertEquals("Got it. I've added this task:\n[T][ ] read\nNow you have 1 tasks in the list.",
                 jaiden.getResponse("todo read"));
         assertEquals("Got it. I've added this task:\n[D][ ] read (by: Aug 22 2025)\n"
-                + "Now you have 2 tasks in the list.\n", jaiden.getResponse("deadline read /by 2025-08-22"));
+                + "Now you have 2 tasks in the list.", jaiden.getResponse("deadline read /by 2025-08-22"));
         assertEquals("Got it. I've added this task:\n[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n"
-                + "Now you have 3 tasks in the list.\n",
+                + "Now you have 3 tasks in the list.",
                 jaiden.getResponse("event read /from 2025-08-22 /to 2025-08-22"));
         assertEquals("Here are the tasks in your list:\n1.[T][ ] read\n2.[D][ ] read (by: Aug 22 2025)\n"
                 + "3.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("list"));
@@ -30,10 +30,10 @@ public class JaidenTest {
                 + "2.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("show 2025-08-22"));
         assertEquals("Here are the matching tasks in your list:\n1.[T][ ] read\n2.[D][ ] read (by: Aug 22 2025)\n"
                 + "3.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("find read"));
-        assertEquals("Nice! I've marked this task as done:\n[T][X] read\n", jaiden.getResponse("mark 1"));
-        assertEquals("OK, I've marked this task as not done yet:\n[T][ ] read\n",
+        assertEquals("Nice! I've marked this task as done:\n[T][X] read", jaiden.getResponse("mark 1"));
+        assertEquals("OK, I've marked this task as not done yet:\n[T][ ] read",
                 jaiden.getResponse("unmark 1"));
-        assertEquals("Noted. I've removed this task:\n[T][ ] read\nNow you have 2 tasks in the list.\n",
+        assertEquals("Noted. I've removed this task:\n[T][ ] read\nNow you have 2 tasks in the list.",
                 jaiden.getResponse("delete 1"));
         assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(",
                 jaiden.getResponse("test"));
@@ -81,7 +81,9 @@ public class JaidenTest {
         jaiden.getResponse("delete 1");
         assertEquals(CommandType.DELETECOMMAND, jaiden.getCommandType());
         jaiden.getResponse("test");
-        assertEquals(CommandType.UNKNOWNCOMMAND, jaiden.getCommandType());
+        assertEquals(CommandType.ERRORCOMMAND, jaiden.getCommandType());
+        jaiden.getResponse("mark");
+        assertEquals(CommandType.ERRORCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("bye");
         assertEquals(CommandType.EXITCOMMAND, jaiden.getCommandType());
     }

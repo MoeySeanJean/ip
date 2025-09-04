@@ -10,10 +10,10 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for delete command.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public DeleteCommand(String[] commands) {
-        super(commands);
+    public DeleteCommand(String[] inputs) {
+        super(inputs);
         this.commandType = CommandType.DELETECOMMAND;
     }
 
@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
      * @inheritDoc
      */
     public void execute(TaskList taskList, Storage storage) {
-        int index = Integer.parseInt(commands[1]) - 1;
+        int index = Integer.parseInt(inputs[1]) - 1;
         this.string = taskList.remove(index);
         storage.save(taskList);
     }

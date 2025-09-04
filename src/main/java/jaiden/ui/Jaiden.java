@@ -13,6 +13,7 @@ public class Jaiden {
     private final Storage storage;
     private TaskList tasks;
     private CommandType commandType;
+    private boolean hasLoadError = false;
 
     /**
      * Constructor for Jaiden.
@@ -20,12 +21,11 @@ public class Jaiden {
      * @param filePath File path to save data in txt format.
      */
     public Jaiden(String filePath) {
-        Ui ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(this.storage.load());
         } catch (JaidenException e) {
-            ui.showLoadingError();
+            this.hasLoadError = true;
             this.tasks = new TaskList();
         }
     }
@@ -35,12 +35,13 @@ public class Jaiden {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(input.split(" "));
             c.execute(this.tasks, this.storage);
             this.commandType = c.getCommandType();
             return c.getString();
         } catch (JaidenException e) {
-            return "Error: " + e.getMessage();
+            this.commandType = CommandType.ERRORCOMMAND;
+            return e.getMessage();
         }
     }
 
@@ -51,5 +52,14 @@ public class Jaiden {
      */
     public CommandType getCommandType() {
         return this.commandType;
+    }
+
+    /**
+     * Checks if Jaiden has load error.
+     *
+     * @return true if Jaiden has load error, false otherwise.
+     */
+    public boolean hasLoadError() {
+        return this.hasLoadError;
     }
 }

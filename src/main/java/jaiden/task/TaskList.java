@@ -47,7 +47,7 @@ public class TaskList {
      */
     public String mark(int index) {
         this.tasks.get(index).markAsDone();
-        return "Nice! I've marked this task as done:\n" + this.tasks.get(index).toString() + "\n";
+        return "Nice! I've marked this task as done:\n" + this.tasks.get(index).toString();
     }
 
     /**
@@ -58,7 +58,7 @@ public class TaskList {
      */
     public String unmark(int index) {
         this.tasks.get(index).markAsNotDone();
-        return "OK, I've marked this task as not done yet:\n" + this.tasks.get(index).toString() + "\n";
+        return "OK, I've marked this task as not done yet:\n" + this.tasks.get(index).toString();
     }
 
     /**
@@ -70,7 +70,7 @@ public class TaskList {
     public String add(Task task) {
         this.tasks.add(task);
         return "Got it. I've added this task:\n" + task.toString() + "\n"
-                + "Now you have " + this.tasks.size() + " tasks in the list.\n";
+                + "Now you have " + this.tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -82,7 +82,7 @@ public class TaskList {
     public String remove(int index) {
         Task task = this.tasks.remove(index);
         return "Noted. I've removed this task:\n" + task.toString() + "\n"
-                + "Now you have " + this.tasks.size() + " tasks in the list.\n";
+                + "Now you have " + this.tasks.size() + " tasks in the list.";
     }
 
     /**

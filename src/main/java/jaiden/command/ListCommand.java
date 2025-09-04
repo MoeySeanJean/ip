@@ -12,10 +12,10 @@ public class ListCommand extends Command {
     /**
      * Constructor for list, show and find commands.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public ListCommand(String[] commands) {
-        super(commands);
+    public ListCommand(String[] inputs) {
+        super(inputs);
         this.commandType = CommandType.LISTCOMMAND;
     }
 
@@ -23,13 +23,13 @@ public class ListCommand extends Command {
      * @inheritDoc
      */
     public void execute(TaskList taskList, Storage storage) {
-        if (commands[0].equals("list")) {
+        if (inputs[0].equals("list")) {
             this.string = taskList.list();
-        } else if (commands[0].equals("show")) {
-            LocalDate showDate = LocalDate.parse(commands[1]);
+        } else if (inputs[0].equals("show")) {
+            LocalDate showDate = LocalDate.parse(inputs[1]);
             this.string = taskList.show(showDate);
         } else {
-            this.string = taskList.find(commands[1]);
+            this.string = taskList.find(inputs[1]);
         }
         storage.save(taskList);
     }

@@ -10,10 +10,10 @@ public class ExitCommand extends Command {
     /**
      * Constructor for exit command.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public ExitCommand(String[] commands) {
-        super(commands);
+    public ExitCommand(String[] inputs) {
+        super(inputs);
         this.commandType = CommandType.EXITCOMMAND;
     }
 

@@ -25,6 +25,9 @@ public class Main extends Application {
             stage.setMinWidth(417);
             fxmlLoader.<MainWindow>getController().setJaiden(this.jaiden);
             stage.show();
+            if (jaiden.hasLoadError()) {
+                fxmlLoader.<MainWindow>getController().showLoadingError();
+            }
             fxmlLoader.<MainWindow>getController().showWelcome();
         } catch (IOException e) {
             e.printStackTrace();

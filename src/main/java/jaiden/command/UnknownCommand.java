@@ -10,11 +10,11 @@ public class UnknownCommand extends Command {
     /**
      * Constructor for unknown command.
      *
-     * @param commands User input.
+     * @param inputs User input.
      */
-    public UnknownCommand(String[] commands) {
-        super(commands);
-        this.commandType = CommandType.UNKNOWNCOMMAND;
+    public UnknownCommand(String[] inputs) {
+        super(inputs);
+        this.commandType = CommandType.ERRORCOMMAND;
     }
 
     /**
