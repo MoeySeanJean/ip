@@ -4,10 +4,9 @@ import java.time.LocalDate;
 
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
-import jaiden.ui.Ui;
 
 /**
- * Class for list and show commands.
+ * Class for list, show and find commands.
  */
 public class ListCommand extends Command {
     /**
@@ -17,21 +16,20 @@ public class ListCommand extends Command {
      */
     public ListCommand(String[] commands) {
         super(commands);
-        this.isExit = false;
     }
 
     /**
      * @inheritDoc
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String msg;
+    public void execute(TaskList taskList, Storage storage) {
         if (commands[0].equals("list")) {
-            msg = taskList.list();
-        } else {
+            this.string = taskList.list();
+        } else if (commands[0].equals("show")) {
             LocalDate showDate = LocalDate.parse(commands[1]);
-            msg = taskList.show(showDate);
+            this.string = taskList.show(showDate);
+        } else {
+            this.string = taskList.find(commands[1]);
         }
-        ui.show(msg);
         storage.save(taskList);
     }
 }

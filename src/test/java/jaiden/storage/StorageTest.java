@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import jaiden.exception.DukeException;
+import jaiden.exception.JaidenException;
 import jaiden.task.Deadline;
 import jaiden.task.Event;
 import jaiden.task.Task;
@@ -46,7 +46,8 @@ public class StorageTest {
             new Storage("data/test.txt").load();
             fail();
         } catch (Exception e) {
-            assertEquals(new DukeException(), e);
+            assertEquals(new JaidenException("The data file is corrupted (Content not in the expected format).")
+                    .getMessage(), e.getMessage());
         }
     }
 

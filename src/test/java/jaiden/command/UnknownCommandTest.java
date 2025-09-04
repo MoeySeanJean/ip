@@ -6,27 +6,29 @@ import org.junit.jupiter.api.Test;
 
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
-import jaiden.ui.Ui;
 
 public class UnknownCommandTest {
     @Test
-    public void isExitTest() {
+    public void executeTest() {
         String[] commands = {"test"};
-        assertEquals(false, new UnknownCommand(commands).isExit());
+        TaskList test = new TaskList();
+        new UnknownCommand(commands).execute(test, new Storage("data/test.txt"));
+        assertEquals(new TaskList(), test);
     }
 
     @Test
-    public void executeTest() {
-        String[] commands = {"bye"};
+    public void getStringTest() {
+        String[] commands = {"test"};
         TaskList test = new TaskList();
-        new UnknownCommand(commands).execute(test, new Ui(), new Storage("data/test.txt"));
-        assertEquals(new TaskList(), test);
+        Command command = new UnknownCommand(commands);
+        command.execute(test, new Storage("data/test.txt"));
+        assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", command.getString());
     }
 
     @Test
     public void equalsTest() {
         String[] commands1 = {"test"};
         String[] commands2 = {"test"};
-        assertEquals(true, new UnknownCommand(commands1).equals(new UnknownCommand(commands2)));
+        assertEquals(new UnknownCommand(commands1), new UnknownCommand(commands2));
     }
 }

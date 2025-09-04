@@ -23,17 +23,11 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String save() {
         return "T | " + super.save();
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

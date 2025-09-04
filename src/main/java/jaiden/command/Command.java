@@ -4,14 +4,13 @@ import java.util.Arrays;
 
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
-import jaiden.ui.Ui;
 
 /**
  * Class for command.
  */
 public abstract class Command {
     protected String[] commands;
-    protected boolean isExit;
+    protected String string;
 
     /**
      * Constructor for command.
@@ -23,26 +22,20 @@ public abstract class Command {
     }
 
     /**
-     * Checks if command is exit command.
-     *
-     * @return Exit status.
-     */
-    public boolean isExit() {
-        return isExit;
-    }
-
-    /**
      * Executes command.
      *
      * @param taskList Task list.
-     * @param ui Ui to show command outputs.
      * @param storage Storage to save current data.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Storage storage);
 
     /**
-     * @inheritDoc
+     * Gets string.
      */
+    public String getString() {
+        return this.string;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -51,6 +44,6 @@ public abstract class Command {
         if (!(obj instanceof Command other)) {
             return false;
         }
-        return Arrays.equals(commands, other.commands) && isExit == other.isExit;
+        return Arrays.equals(commands, other.commands);
     }
 }

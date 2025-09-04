@@ -4,7 +4,7 @@ package jaiden.task;
  * Class for task.
  */
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**
@@ -70,17 +70,11 @@ public class Task {
         return (isDone ? "1" : "0") + " | " + description;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

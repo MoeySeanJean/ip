@@ -1,29 +1,49 @@
 package jaiden.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
-import jaiden.ui.Ui;
 
 public class ListCommandTest {
     @Test
-    public void isExitTest() {
-        String[] commands = {"list"};
-        assertEquals(false, new ListCommand(commands).isExit());
+    public void executeTest() {
+        TaskList test = new TaskList();
+
+        String[] commands1 = {"list"};
+        new ListCommand(commands1).execute(test, new Storage("data/test.txt"));
+        assertEquals(new TaskList(), test);
+
+        String[] commands2 = {"show", "2025-08-22"};
+        new ListCommand(commands2).execute(test, new Storage("data/test.txt"));
+        assertEquals(new TaskList(), test);
+
+        String[] commands3 = {"find", "test"};
+        new ListCommand(commands3).execute(test, new Storage("data/test.txt"));
+        assertEquals(new TaskList(), test);
     }
 
     @Test
-    public void executeTest() {
-        String[] commands1 = {"list"};
+    public void getStringTest() {
         TaskList test = new TaskList();
-        new ListCommand(commands1).execute(test, new Ui(), new Storage("data/test.txt"));
-        assertEquals(new TaskList(), test);
+
+        String[] commands1 = {"list"};
+        Command command1 = new ListCommand(commands1);
+        command1.execute(test, new Storage("data/test.txt"));
+        assertEquals("Here are the tasks in your list:\n", command1.getString());
+
         String[] commands2 = {"show", "2025-08-22"};
-        new ListCommand(commands2).execute(test, new Ui(), new Storage("data/test.txt"));
-        assertEquals(new TaskList(), test);
+        Command command2 = new ListCommand(commands2);
+        command2.execute(test, new Storage("data/test.txt"));
+        assertEquals("Here are the tasks on Aug 22 2025 in your list:\n", command2.getString());
+
+        String[] commands3 = {"find", "test"};
+        Command command3 = new ListCommand(commands3);
+        command3.execute(test, new Storage("data/test.txt"));
+        assertEquals("Here are the matching tasks in your list:\n", command3.getString());
     }
 
     @Test
@@ -31,7 +51,7 @@ public class ListCommandTest {
         String[] commands1 = {"list"};
         String[] commands2 = {"list"};
         String[] commands3 = {"show", "2025-08-22"};
-        assertEquals(true, new ListCommand(commands1).equals(new ListCommand(commands2)));
-        assertEquals(false, new ListCommand(commands1).equals(new ListCommand(commands3)));
+        assertEquals(new ListCommand(commands1), new ListCommand(commands2));
+        assertNotEquals(new ListCommand(commands1), new ListCommand(commands3));
     }
 }
