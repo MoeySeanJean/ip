@@ -1,6 +1,7 @@
 package jaiden.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
@@ -8,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
-    public void saveTest() {
-        assertEquals("D | 0 | test | 2025-08-22", new Deadline("test", LocalDate.parse("2025-08-22")).save());
+    public void isByTest() {
+        assertTrue(new Deadline("test", LocalDate.parse("2025-08-22")).isBy(LocalDate.parse("2025-08-22")));
     }
 
     @Test
-    public void isBetweenTest() {
-        assertEquals(true, new Deadline("test", LocalDate.parse("2025-08-22")).isBy(LocalDate.parse("2025-08-22")));
+    public void saveTest() {
+        assertEquals("D | 0 | test | 2025-08-22", new Deadline("test", LocalDate.parse("2025-08-22")).save());
     }
 
     @Test

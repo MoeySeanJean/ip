@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Class for event task
  */
 public class Event extends Task {
-    private LocalDate from;
-    private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     /**
      * Constructor for event task.
@@ -47,17 +47,11 @@ public class Event extends Task {
         return (from.isBefore(d) || from.isEqual(d)) && (to.isAfter(d) || to.isEqual(d));
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String save() {
         return "E | " + super.save() + " | " + from + " | " + to;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String toString() {
         return "[E]" + super.toString()

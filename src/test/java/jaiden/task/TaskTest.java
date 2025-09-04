@@ -1,6 +1,9 @@
 package jaiden.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +29,13 @@ public class TaskTest {
     }
 
     @Test
+    public void hasTextTest() {
+        Task test = new Task("test");
+        assertTrue(test.hasText("test"));
+        assertFalse(test.hasText("test1"));
+    }
+
+    @Test
     public void saveTest() {
         assertEquals("0 | test", new Task("test").save());
         assertEquals("1 | test", new Task("test", true).save());
@@ -39,9 +49,9 @@ public class TaskTest {
 
     @Test
     public void equalsTest() {
-        assertEquals(true, new Task("test").equals(new Task("test")));
-        assertEquals(true, new Task("test", true).equals(new Task("test", true)));
-        assertEquals(false, new Task("test1").equals(new Task("test2")));
-        assertEquals(false, new Task("test", true).equals(new Task("test", false)));
+        assertEquals(new Task("test"), new Task("test"));
+        assertEquals(new Task("test", true), new Task("test", true));
+        assertNotEquals(new Task("test1"), new Task("test2"));
+        assertNotEquals(new Task("test", true), new Task("test", false));
     }
 }

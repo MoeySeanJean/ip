@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import jaiden.exception.DukeException;
+import jaiden.exception.JaidenException;
 import jaiden.task.Deadline;
 import jaiden.task.Event;
 import jaiden.task.Task;
@@ -19,7 +19,7 @@ import jaiden.task.Todo;
  * Class for storage.
  */
 public class Storage {
-    private File data;
+    private final File data;
 
     /**
      * Constructor for storage.
@@ -30,14 +30,13 @@ public class Storage {
         this.data = new File(filePath);
     }
 
-
     /**
      * Loads data from local storage.
      *
      * @return List of tasks.
-     * @throws DukeException If invalid format from local storage.
+     * @throws JaidenException If invalid format from local storage.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws JaidenException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner dataReader;
         if (!data.exists()) {
@@ -52,29 +51,29 @@ public class Storage {
                 String line = dataReader.nextLine();
                 String[] temp = line.split(" \\| ");
                 if (temp.length == 0) {
-                    throw new DukeException();
+                    throw new JaidenException("The data file is corrupted (Content not in the expected format).");
                 } else if (temp[0].equals("T")) {
                     if (temp.length != 3 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank()) {
-                        throw new DukeException();
+                        throw new JaidenException("The data file is corrupted (Content not in the expected format).");
                     }
                     tasks.add(new Todo(temp[2], temp[1].equals("1")));
                 } else if (temp[0].equals("D")) {
                     if (temp.length != 4
                             || !(temp[1].equals("0") || temp[1].equals("1"))
                                 || temp[2].isBlank() || temp[3].isBlank()) {
-                        throw new DukeException();
+                        throw new JaidenException("The data file is corrupted (Content not in the expected format).");
                     }
                     tasks.add(new Deadline(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3])));
                 } else if (temp[0].equals("E")) {
                     if (temp.length != 5
                             || !(temp[1].equals("0") || temp[1].equals("1"))
                                 || temp[2].isBlank() || temp[3].isBlank() || temp[4].isBlank()) {
-                        throw new DukeException();
+                        throw new JaidenException("The data file is corrupted (Content not in the expected format).");
                     }
                     tasks.add(new Event(temp[2], temp[1].equals("1"),
                             LocalDate.parse(temp[3]), LocalDate.parse(temp[4])));
                 } else {
-                    throw new DukeException();
+                    throw new JaidenException("The data file is corrupted (Content not in the expected format).");
                 }
             }
         }
@@ -93,7 +92,7 @@ public class Storage {
             dataWriter.write(msg);
             dataWriter.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

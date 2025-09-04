@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Class for task list.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for empty task list.
@@ -32,11 +32,11 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String list() {
-        String msg = "     Here are the tasks in your list:\n";
+        StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            msg += "     " + (i + 1) + "." + tasks.get(i).toString() + "\n";
+            msg.append((i + 1)).append(".").append(tasks.get(i).toString()).append("\n");
         }
-        return msg;
+        return msg.toString();
     }
 
     /**
@@ -47,9 +47,7 @@ public class TaskList {
      */
     public String mark(int index) {
         tasks.get(index).markAsDone();
-        String msg = "     Nice! I've marked this task as done:\n"
-                + "       " + tasks.get(index).toString() + "\n";
-        return msg;
+        return "Nice! I've marked this task as done:\n" + tasks.get(index).toString() + "\n";
     }
 
     /**
@@ -60,9 +58,7 @@ public class TaskList {
      */
     public String unmark(int index) {
         tasks.get(index).markAsNotDone();
-        String msg = "     OK, I've marked this task as not done yet:\n"
-                + "       " + tasks.get(index).toString() + "\n";
-        return msg;
+        return "OK, I've marked this task as not done yet:\n" + tasks.get(index).toString() + "\n";
     }
 
     /**
@@ -73,10 +69,8 @@ public class TaskList {
      */
     public String add(Task task) {
         tasks.add(task);
-        String msg = "     Got it. I've added this task:\n"
-                + "       " + task.toString() + "\n"
-                + "     Now you have " + tasks.size() + " tasks in the list.\n";
-        return msg;
+        return "Got it. I've added this task:\n" + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -87,11 +81,8 @@ public class TaskList {
      */
     public String remove(int index) {
         Task task = tasks.remove(index);
-        String msg = "     Noted. I've removed this task:\n"
-                + "       " + task.toString() + "\n"
-                + "     Now you have " + tasks.size() + " tasks in the list.\n";
-
-        return msg;
+        return "Noted. I've removed this task:\n" + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -101,23 +92,25 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String show(LocalDate showDate) {
-        String msg = "     Here are the tasks on "
-                + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
+        StringBuilder msg = new StringBuilder("Here are the tasks on "
+                + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
+        for (int i = 0, count = 1; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             if (t.getClass() == Deadline.class) {
                 Deadline d = (Deadline) t;
                 if (d.isBy(showDate)) {
-                    msg += "     " + (i + 1) + "." + t.toString() + "\n";
+                    msg.append(count).append(".").append(t.toString()).append("\n");
+                    count++;
                 }
             } else if (t.getClass() == Event.class) {
                 Event e = (Event) t;
                 if (e.isBetween(showDate)) {
-                    msg += "     " + (i + 1) + "." + t.toString() + "\n";
+                    msg.append(count).append(".").append(t.toString()).append("\n");
+                    count++;
                 }
             }
         }
-        return msg;
+        return msg.toString();
     }
 
     /**
@@ -127,14 +120,15 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String find(String text) {
-        String msg = "     Here are the matching tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
+        StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0, count = 1; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             if (t.hasText(text)) {
-                msg += "     " + (i + 1) + "." + t.toString() + "\n";
+                msg.append(count).append(".").append(t.toString()).append("\n");
+                count++;
             }
         }
-        return msg;
+        return msg.toString();
     }
 
     /**
@@ -143,16 +137,13 @@ public class TaskList {
      * @return String representation to be saved.
      */
     public String save() {
-        String msg = "";
+        StringBuilder msg = new StringBuilder();
         for (Task task : tasks) {
-            msg += task.save() + "\n";
+            msg.append(task.save()).append("\n");
         }
-        return msg;
+        return msg.toString();
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
