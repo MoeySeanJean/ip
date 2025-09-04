@@ -1,5 +1,6 @@
 package jaiden.ui;
 
+import jaiden.command.CommandType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,7 +34,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
     }
 
     /**
@@ -48,7 +49,7 @@ public class MainWindow extends AnchorPane {
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getJaidenDialog("Hello! I'm Jaiden\nWhat can I do for you?", jaidenImage, "")
+                DialogBox.getJaidenDialog("Hello! I'm Jaiden\nWhat can I do for you?", this.jaidenImage, CommandType.NULLCOMMAND)
         );
     }
 
@@ -58,15 +59,15 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = jaiden.getResponse(input);
-        String commandType = jaiden.getCommandType();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getJaidenDialog(response, jaidenImage, commandType)
+        String input = this.userInput.getText();
+        String response = this.jaiden.getResponse(input);
+        CommandType commandType = this.jaiden.getCommandType();
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, this.userImage),
+                DialogBox.getJaidenDialog(response, this.jaidenImage, commandType)
         );
-        userInput.clear();
-        if (commandType.equals("ExitCommand")) {
+        this.userInput.clear();
+        if (commandType.equals(CommandType.EXITCOMMAND)) {
             Platform.exit();
         }
     }

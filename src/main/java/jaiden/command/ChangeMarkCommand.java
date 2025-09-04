@@ -14,6 +14,7 @@ public class ChangeMarkCommand extends Command {
      */
     public ChangeMarkCommand(String[] commands) {
         super(commands);
+        this.commandType = CommandType.CHANGEMARKCOMMAND;
     }
 
     /**

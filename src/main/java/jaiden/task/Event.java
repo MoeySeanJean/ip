@@ -44,18 +44,18 @@ public class Event extends Task {
      * @return True if the date is between the task start date and end date.
      */
     public boolean isBetween(LocalDate d) {
-        return (from.isBefore(d) || from.isEqual(d)) && (to.isAfter(d) || to.isEqual(d));
+        return (this.from.isBefore(d) || this.from.isEqual(d)) && (this.to.isAfter(d) || this.to.isEqual(d));
     }
 
     @Override
     public String save() {
-        return "E | " + super.save() + " | " + from + " | " + to;
+        return "E | " + super.save() + " | " + this.from + " | " + this.to;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " to: " + to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

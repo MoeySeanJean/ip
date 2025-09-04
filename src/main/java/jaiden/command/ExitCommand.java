@@ -14,6 +14,7 @@ public class ExitCommand extends Command {
      */
     public ExitCommand(String[] commands) {
         super(commands);
+        this.commandType = CommandType.EXITCOMMAND;
     }
 
     /**

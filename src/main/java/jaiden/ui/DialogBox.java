@@ -3,6 +3,7 @@ package jaiden.ui;
 import java.io.IOException;
 import java.util.Collections;
 
+import jaiden.command.CommandType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,9 +40,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        this.dialog.setText(text);
+        this.displayPicture.setImage(img);
     }
 
     /**
@@ -52,7 +52,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
+        this.dialog.getStyleClass().add("reply-label");
     }
 
     /**
@@ -60,25 +60,25 @@ public class DialogBox extends HBox {
      *
      * @param commandType Type of command.
      */
-    private void changeDialogStyle(String commandType) {
+    private void changeDialogStyle(CommandType commandType) {
         switch(commandType) {
-        case "AddCommand":
-            dialog.getStyleClass().add("add-label");
+        case ADDCOMMAND:
+            this.dialog.getStyleClass().add("add-label");
             break;
-        case "ChangeMarkCommand":
-            dialog.getStyleClass().add("marked-label");
+        case CHANGEMARKCOMMAND:
+            this.dialog.getStyleClass().add("marked-label");
             break;
-        case "DeleteCommand":
-            dialog.getStyleClass().add("delete-label");
+        case DELETECOMMAND:
+            this.dialog.getStyleClass().add("delete-label");
             break;
-        case "ListCommand":
-            dialog.getStyleClass().add("list-label");
+        case LISTCOMMAND:
+            this.dialog.getStyleClass().add("list-label");
             break;
-        case "ExitCommand":
-            dialog.getStyleClass().add("exit-label");
+        case EXITCOMMAND:
+            this.dialog.getStyleClass().add("exit-label");
             break;
-        case "UnknownCommand":
-            dialog.getStyleClass().add("error-label");
+        case UNKNOWNCOMMAND:
+            this.dialog.getStyleClass().add("error-label");
             break;
         default:
         }
@@ -103,7 +103,7 @@ public class DialogBox extends HBox {
      * @param commandType Type of command.
      * @return Jaiden dialog box.
      */
-    public static DialogBox getJaidenDialog(String text, Image img, String commandType) {
+    public static DialogBox getJaidenDialog(String text, Image img, CommandType commandType) {
         var db = new DialogBox(text, img);
         db.flip();
         db.changeDialogStyle(commandType);

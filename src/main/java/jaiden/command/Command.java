@@ -11,6 +11,7 @@ import jaiden.task.TaskList;
 public abstract class Command {
     protected String[] commands;
     protected String string;
+    protected CommandType commandType;
 
     /**
      * Constructor for command.
@@ -36,6 +37,15 @@ public abstract class Command {
         return this.string;
     }
 
+    /**
+     * Gets command type.
+     *
+     * @return Command type.
+     */
+    public CommandType getCommandType() {
+        return this.commandType;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -44,6 +54,6 @@ public abstract class Command {
         if (!(obj instanceof Command other)) {
             return false;
         }
-        return Arrays.equals(commands, other.commands);
+        return Arrays.equals(this.commands, other.commands);
     }
 }

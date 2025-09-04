@@ -14,6 +14,7 @@ public class UnknownCommand extends Command {
      */
     public UnknownCommand(String[] commands) {
         super(commands);
+        this.commandType = CommandType.UNKNOWNCOMMAND;
     }
 
     /**

@@ -20,6 +20,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(String[] commands) {
         super(commands);
+        this.commandType = CommandType.ADDCOMMAND;
     }
 
     /**

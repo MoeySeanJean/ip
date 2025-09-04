@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String[] commands) {
         super(commands);
+        this.commandType = CommandType.DELETECOMMAND;
     }
 
     /**

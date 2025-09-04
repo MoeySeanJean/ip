@@ -1,6 +1,7 @@
 package jaiden.ui;
 
 import jaiden.command.Command;
+import jaiden.command.CommandType;
 import jaiden.exception.JaidenException;
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
@@ -11,7 +12,7 @@ import jaiden.task.TaskList;
 public class Jaiden {
     private final Storage storage;
     private TaskList tasks;
-    private String commandType;
+    private CommandType commandType;
 
     /**
      * Constructor for Jaiden.
@@ -20,12 +21,12 @@ public class Jaiden {
      */
     public Jaiden(String filePath) {
         Ui ui = new Ui();
-        storage = new Storage(filePath);
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(this.storage.load());
         } catch (JaidenException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -35,8 +36,8 @@ public class Jaiden {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            c.execute(tasks, storage);
-            commandType = c.getClass().getSimpleName();
+            c.execute(this.tasks, this.storage);
+            this.commandType = c.getCommandType();
             return c.getString();
         } catch (JaidenException e) {
             return "Error: " + e.getMessage();
@@ -48,7 +49,7 @@ public class Jaiden {
      *
      * @return Command type.
      */
-    public String getCommandType() {
-        return commandType;
+    public CommandType getCommandType() {
+        return this.commandType;
     }
 }

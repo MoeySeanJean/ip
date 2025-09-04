@@ -23,7 +23,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
-            fxmlLoader.<MainWindow>getController().setJaiden(jaiden);
+            fxmlLoader.<MainWindow>getController().setJaiden(this.jaiden);
             stage.show();
             fxmlLoader.<MainWindow>getController().showWelcome();
         } catch (IOException e) {

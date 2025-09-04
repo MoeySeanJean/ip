@@ -39,16 +39,16 @@ public class Deadline extends Task {
      * @return True if the date is before the task due date.
      */
     public boolean isBy(LocalDate d) {
-        return d.isBefore(by) || d.isEqual(by);
+        return d.isBefore(this.by) || d.isEqual(this.by);
     }
 
     @Override
     public String save() {
-        return "D | " + super.save() + " | " + by;
+        return "D | " + super.save() + " | " + this.by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

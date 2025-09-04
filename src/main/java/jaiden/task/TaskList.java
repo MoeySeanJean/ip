@@ -33,8 +33,8 @@ public class TaskList {
      */
     public String list() {
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            msg.append((i + 1)).append(".").append(tasks.get(i).toString()).append("\n");
+        for (int i = 0; i < this.tasks.size(); i++) {
+            msg.append((i + 1)).append(".").append(this.tasks.get(i).toString()).append("\n");
         }
         return msg.toString();
     }
@@ -46,8 +46,8 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String mark(int index) {
-        tasks.get(index).markAsDone();
-        return "Nice! I've marked this task as done:\n" + tasks.get(index).toString() + "\n";
+        this.tasks.get(index).markAsDone();
+        return "Nice! I've marked this task as done:\n" + this.tasks.get(index).toString() + "\n";
     }
 
     /**
@@ -57,8 +57,8 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String unmark(int index) {
-        tasks.get(index).markAsNotDone();
-        return "OK, I've marked this task as not done yet:\n" + tasks.get(index).toString() + "\n";
+        this.tasks.get(index).markAsNotDone();
+        return "OK, I've marked this task as not done yet:\n" + this.tasks.get(index).toString() + "\n";
     }
 
     /**
@@ -68,9 +68,9 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String add(Task task) {
-        tasks.add(task);
+        this.tasks.add(task);
         return "Got it. I've added this task:\n" + task.toString() + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n";
+                + "Now you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -80,9 +80,9 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String remove(int index) {
-        Task task = tasks.remove(index);
+        Task task = this.tasks.remove(index);
         return "Noted. I've removed this task:\n" + task.toString() + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n";
+                + "Now you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -94,8 +94,8 @@ public class TaskList {
     public String show(LocalDate showDate) {
         StringBuilder msg = new StringBuilder("Here are the tasks on "
                 + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
-        for (int i = 0, count = 1; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
+        for (int i = 0, count = 1; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
             if (t.getClass() == Deadline.class) {
                 Deadline d = (Deadline) t;
                 if (d.isBy(showDate)) {
@@ -121,8 +121,8 @@ public class TaskList {
      */
     public String find(String text) {
         StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0, count = 1; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
+        for (int i = 0, count = 1; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
             if (t.hasText(text)) {
                 msg.append(count).append(".").append(t.toString()).append("\n");
                 count++;
@@ -138,7 +138,7 @@ public class TaskList {
      */
     public String save() {
         StringBuilder msg = new StringBuilder();
-        for (Task task : tasks) {
+        for (Task task : this.tasks) {
             msg.append(task.save()).append("\n");
         }
         return msg.toString();
@@ -152,6 +152,6 @@ public class TaskList {
         if (!(obj instanceof TaskList other)) {
             return false;
         }
-        return tasks.equals(other.tasks);
+        return this.tasks.equals(other.tasks);
     }
 }

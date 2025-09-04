@@ -34,21 +34,21 @@ public class Task {
      * @return Status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (this.isDone ? "X" : " ");
     }
 
     /**
      * Marks task as done.
      */
     public void markAsDone() {
-        isDone = true;
+        this.isDone = true;
     }
 
     /**
      * Marks task as not done.
      */
     public void markAsNotDone() {
-        isDone = false;
+        this.isDone = false;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Task {
      * @return True if contains text.
      */
     public boolean hasText(String text) {
-        return description.contains(text);
+        return this.description.contains(text);
     }
 
     /**
@@ -67,12 +67,12 @@ public class Task {
      * @return String representation to be saved
      */
     public String save() {
-        return (isDone ? "1" : "0") + " | " + description;
+        return (this.isDone ? "1" : "0") + " | " + this.description;
     }
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 
     @Override
@@ -83,6 +83,6 @@ public class Task {
         if (!(obj instanceof Task other)) {
             return false;
         }
-        return description.equals(other.description) && isDone == other.isDone;
+        return this.description.equals(other.description) && this.isDone == other.isDone;
     }
 }

@@ -39,11 +39,11 @@ public class Storage {
     public ArrayList<Task> load() throws JaidenException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner dataReader;
-        if (!data.exists()) {
+        if (!this.data.exists()) {
             new File("./data").mkdir();
         } else {
             try {
-                dataReader = new Scanner(data);
+                dataReader = new Scanner(this.data);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -87,7 +87,7 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         try {
-            FileWriter dataWriter = new FileWriter(data);
+            FileWriter dataWriter = new FileWriter(this.data);
             String msg = tasks.save();
             dataWriter.write(msg);
             dataWriter.close();

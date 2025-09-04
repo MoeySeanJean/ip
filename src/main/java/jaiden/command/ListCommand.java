@@ -10,12 +10,13 @@ import jaiden.task.TaskList;
  */
 public class ListCommand extends Command {
     /**
-     * Constructor for list and show commands.
+     * Constructor for list, show and find commands.
      *
      * @param commands User input.
      */
     public ListCommand(String[] commands) {
         super(commands);
+        this.commandType = CommandType.LISTCOMMAND;
     }
 
     /**
