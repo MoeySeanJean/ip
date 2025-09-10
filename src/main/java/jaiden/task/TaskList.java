@@ -3,6 +3,7 @@ package jaiden.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Class for task list.
@@ -33,9 +34,9 @@ public class TaskList {
      */
     public String list() {
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < this.tasks.size(); i++) {
-            msg.append((i + 1)).append(".").append(this.tasks.get(i).toString()).append("\n");
-        }
+        IntStream.range(0, this.tasks.size())
+                .mapToObj(i -> (i + 1) + "." + this.tasks.get(i) + "\n")
+                .forEach(msg::append);
         return msg.toString();
     }
 
@@ -121,13 +122,9 @@ public class TaskList {
      */
     public String find(String text) {
         StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0, count = 1; i < this.tasks.size(); i++) {
-            Task t = this.tasks.get(i);
-            if (t.hasText(text)) {
-                msg.append(count).append(".").append(t.toString()).append("\n");
-                count++;
-            }
-        }
+        IntStream.range(0, this.tasks.size())
+                .filter(i -> this.tasks.get(i).hasText(text))
+                .forEachOrdered(i -> msg.append(i + 1).append(".").append(this.tasks.get(i)).append("\n"));
         return msg.toString();
     }
 
@@ -138,9 +135,9 @@ public class TaskList {
      */
     public String save() {
         StringBuilder msg = new StringBuilder();
-        for (Task task : this.tasks) {
-            msg.append(task.save()).append("\n");
-        }
+        this.tasks.stream()
+                .map(Task::save)
+                .forEach(s -> msg.append(s).append("\n"));
         return msg.toString();
     }
 
