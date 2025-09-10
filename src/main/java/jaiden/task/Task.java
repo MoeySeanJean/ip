@@ -13,6 +13,7 @@ public class Task {
      * @param description Description of task.
      */
     public Task(String description) {
+        assert description != null;
         this.description = description;
         this.isDone = false;
     }
@@ -24,6 +25,7 @@ public class Task {
      * @param isDone Done status.
      */
     public Task(String description, boolean isDone) {
+        assert description != null;
         this.description = description;
         this.isDone = isDone;
     }
@@ -58,6 +60,7 @@ public class Task {
      * @return True if contains text.
      */
     public boolean hasText(String text) {
+        assert text != null;
         return this.description.contains(text);
     }
 

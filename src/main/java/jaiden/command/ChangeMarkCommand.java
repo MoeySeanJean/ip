@@ -22,6 +22,7 @@ public class ChangeMarkCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         int index = Integer.parseInt(inputs[1]) - 1;
+        assert index >= 0;
 
         switch (inputs[0]) {
         case "mark":
@@ -35,6 +36,7 @@ public class ChangeMarkCommand extends Command {
             break;
         }
 
+        assert this.string != null;
         storage.save(taskList);
     }
 }

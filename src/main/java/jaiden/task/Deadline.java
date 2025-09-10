@@ -17,6 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by) {
         super(description);
+        assert by != null;
         this.by = by;
     }
 
@@ -29,6 +30,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
+        assert by != null;
         this.by = by;
     }
 
@@ -39,6 +41,7 @@ public class Deadline extends Task {
      * @return True if the date is before the task due date.
      */
     public boolean isBy(LocalDate d) {
+        assert d != null;
         return d.isBefore(this.by) || d.isEqual(this.by);
     }
 

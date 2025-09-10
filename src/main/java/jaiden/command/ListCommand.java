@@ -38,6 +38,7 @@ public class ListCommand extends Command {
             this.string = "";
             break;
         }
+        assert this.string != null;
 
         storage.save(taskList);
     }

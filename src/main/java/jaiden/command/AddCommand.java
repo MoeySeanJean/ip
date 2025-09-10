@@ -28,6 +28,7 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         String description = inputs[1];
+        assert !description.isBlank();
 
         Task task;
         switch (inputs[0]) {
@@ -49,6 +50,7 @@ public class AddCommand extends Command {
         }
 
         this.string = taskList.add(task);
+        assert this.string != null;
 
         storage.save(taskList);
     }

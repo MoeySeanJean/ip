@@ -27,6 +27,7 @@ public class Storage {
      * @param filePath File path to save data in txt format.
      */
     public Storage(String filePath) {
+        assert filePath != null;
         this.data = new File(filePath);
     }
 
@@ -41,7 +42,8 @@ public class Storage {
         Scanner dataReader;
 
         if (!this.data.exists()) {
-            new File("./data").mkdir();
+            boolean isCreated = new File("./data").mkdir();
+            assert isCreated;
         }
 
         try {
@@ -166,6 +168,7 @@ public class Storage {
             FileWriter dataWriter = new FileWriter(this.data);
 
             String msg = tasks.save();
+            assert msg != null;
 
             dataWriter.write(msg);
             dataWriter.close();

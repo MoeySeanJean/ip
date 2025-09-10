@@ -62,6 +62,7 @@ public class DialogBox extends HBox {
      * @param commandType Type of command.
      */
     private void changeDialogStyle(CommandType commandType) {
+        assert commandType != null;
         switch(commandType) {
         case ADDCOMMAND:
             this.dialog.getStyleClass().add("add-label");
@@ -94,6 +95,8 @@ public class DialogBox extends HBox {
      * @return User dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
+        assert text != null;
+        assert img != null;
         return new DialogBox(text, img);
     }
 
@@ -106,6 +109,9 @@ public class DialogBox extends HBox {
      * @return Jaiden dialog box.
      */
     public static DialogBox getJaidenDialog(String text, Image img, CommandType commandType) {
+        assert text != null;
+        assert img != null;
+        assert commandType != null;
         var db = new DialogBox(text, img);
         db.flip();
         db.changeDialogStyle(commandType);

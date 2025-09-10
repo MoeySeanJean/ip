@@ -23,9 +23,11 @@ public class Parser {
      * @return Corresponding command.
      */
     public static Command parse(String... inputs) throws JaidenException {
+        assert inputs.length > 0;
         List<String> parsedInputs = parseInputs(inputs);
 
         String commandType = inputs[0];
+        assert commandType != null;
         checkInputFormat(commandType, parsedInputs);
 
         return switch (commandType) {
