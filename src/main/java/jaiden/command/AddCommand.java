@@ -29,19 +29,29 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Storage storage) {
         String description = inputs[1];
         assert !description.isBlank();
+
         Task task;
-        if (inputs[0].equals("todo")) {
+        switch (inputs[0]) {
+        case "todo":
             task = new Todo(description);
-        } else if (inputs[0].equals("deadline")) {
+            break;
+        case "deadline":
             LocalDate by = LocalDate.parse(inputs[3]);
             task = new Deadline(description, by);
-        } else {
+            break;
+        case "event":
             LocalDate from = LocalDate.parse(inputs[3]);
             LocalDate to = LocalDate.parse(inputs[5]);
             task = new Event(description, from, to);
+            break;
+        default:
+            task = new Task(description);
+            break;
         }
+
         this.string = taskList.add(task);
         assert this.string != null;
+
         storage.save(taskList);
     }
 }

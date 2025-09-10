@@ -35,9 +35,11 @@ public class TaskList {
      */
     public String list() {
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
+
         IntStream.range(0, this.tasks.size())
                 .mapToObj(i -> (i + 1) + "." + this.tasks.get(i) + "\n")
                 .forEach(msg::append);
+
         return msg.toString();
     }
 
@@ -50,6 +52,7 @@ public class TaskList {
     public String mark(int index) {
         assert index >= 0 && index < this.tasks.size();
         this.tasks.get(index).markAsDone();
+
         return "Nice! I've marked this task as done:\n" + this.tasks.get(index).toString();
     }
 
@@ -62,6 +65,7 @@ public class TaskList {
     public String unmark(int index) {
         assert index >= 0 && index < this.tasks.size();
         this.tasks.get(index).markAsNotDone();
+
         return "OK, I've marked this task as not done yet:\n" + this.tasks.get(index).toString();
     }
 
@@ -74,6 +78,7 @@ public class TaskList {
     public String add(Task task) {
         assert task != null;
         this.tasks.add(task);
+
         return "Got it. I've added this task:\n" + task.toString() + "\n"
                 + "Now you have " + this.tasks.size() + " tasks in the list.";
     }
@@ -87,6 +92,7 @@ public class TaskList {
     public String remove(int index) {
         assert index >= 0 && index < this.tasks.size();
         Task task = this.tasks.remove(index);
+
         return "Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + this.tasks.size() + " tasks in the list.";
     }
@@ -101,22 +107,31 @@ public class TaskList {
         assert showDate != null;
         StringBuilder msg = new StringBuilder("Here are the tasks on "
                 + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
+
         for (int i = 0, count = 1; i < this.tasks.size(); i++) {
             Task t = this.tasks.get(i);
+
             if (t.getClass() == Deadline.class) {
                 Deadline d = (Deadline) t;
-                if (d.isBy(showDate)) {
-                    msg.append(count).append(".").append(t.toString()).append("\n");
-                    count++;
+
+                if (!d.isBy(showDate)) {
+                    continue;
                 }
+
+                msg.append(count).append(".").append(t.toString()).append("\n");
+                count++;
             } else if (t.getClass() == Event.class) {
                 Event e = (Event) t;
-                if (e.isBetween(showDate)) {
-                    msg.append(count).append(".").append(t.toString()).append("\n");
-                    count++;
+
+                if (!e.isBetween(showDate)) {
+                    continue;
                 }
+
+                msg.append(count).append(".").append(t.toString()).append("\n");
+                count++;
             }
         }
+
         return msg.toString();
     }
 
@@ -129,9 +144,11 @@ public class TaskList {
     public String find(String text) {
         assert text != null;
         StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:\n");
+
         IntStream.range(0, this.tasks.size())
                 .filter(i -> this.tasks.get(i).hasText(text))
                 .forEachOrdered(i -> msg.append(i + 1).append(".").append(this.tasks.get(i)).append("\n"));
+
         return msg.toString();
     }
 
@@ -142,9 +159,11 @@ public class TaskList {
      */
     public String save() {
         StringBuilder msg = new StringBuilder();
+
         this.tasks.stream()
                 .map(Task::save)
                 .forEach(s -> msg.append(s).append("\n"));
+
         return msg.toString();
     }
 
