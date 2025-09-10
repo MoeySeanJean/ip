@@ -22,6 +22,7 @@ public class UnknownCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         this.string = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+
         storage.save(taskList);
     }
 }

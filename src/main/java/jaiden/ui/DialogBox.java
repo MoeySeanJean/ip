@@ -40,6 +40,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
     }
@@ -81,6 +82,7 @@ public class DialogBox extends HBox {
             this.dialog.getStyleClass().add("error-label");
             break;
         default:
+            break;
         }
     }
 

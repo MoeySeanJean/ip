@@ -33,9 +33,11 @@ public class TaskList {
      */
     public String list() {
         StringBuilder msg = new StringBuilder("Here are the tasks in your list:\n");
+
         for (int i = 0; i < this.tasks.size(); i++) {
             msg.append((i + 1)).append(".").append(this.tasks.get(i).toString()).append("\n");
         }
+
         return msg.toString();
     }
 
@@ -47,6 +49,7 @@ public class TaskList {
      */
     public String mark(int index) {
         this.tasks.get(index).markAsDone();
+
         return "Nice! I've marked this task as done:\n" + this.tasks.get(index).toString();
     }
 
@@ -58,6 +61,7 @@ public class TaskList {
      */
     public String unmark(int index) {
         this.tasks.get(index).markAsNotDone();
+
         return "OK, I've marked this task as not done yet:\n" + this.tasks.get(index).toString();
     }
 
@@ -69,6 +73,7 @@ public class TaskList {
      */
     public String add(Task task) {
         this.tasks.add(task);
+
         return "Got it. I've added this task:\n" + task.toString() + "\n"
                 + "Now you have " + this.tasks.size() + " tasks in the list.";
     }
@@ -81,6 +86,7 @@ public class TaskList {
      */
     public String remove(int index) {
         Task task = this.tasks.remove(index);
+
         return "Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + this.tasks.size() + " tasks in the list.";
     }
@@ -94,22 +100,31 @@ public class TaskList {
     public String show(LocalDate showDate) {
         StringBuilder msg = new StringBuilder("Here are the tasks on "
                 + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
+
         for (int i = 0, count = 1; i < this.tasks.size(); i++) {
             Task t = this.tasks.get(i);
+
             if (t.getClass() == Deadline.class) {
                 Deadline d = (Deadline) t;
-                if (d.isBy(showDate)) {
-                    msg.append(count).append(".").append(t.toString()).append("\n");
-                    count++;
+
+                if (!d.isBy(showDate)) {
+                    continue;
                 }
+
+                msg.append(count).append(".").append(t.toString()).append("\n");
+                count++;
             } else if (t.getClass() == Event.class) {
                 Event e = (Event) t;
-                if (e.isBetween(showDate)) {
-                    msg.append(count).append(".").append(t.toString()).append("\n");
-                    count++;
+
+                if (!e.isBetween(showDate)) {
+                    continue;
                 }
+
+                msg.append(count).append(".").append(t.toString()).append("\n");
+                count++;
             }
         }
+
         return msg.toString();
     }
 
@@ -121,13 +136,18 @@ public class TaskList {
      */
     public String find(String text) {
         StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:\n");
+
         for (int i = 0, count = 1; i < this.tasks.size(); i++) {
             Task t = this.tasks.get(i);
-            if (t.hasText(text)) {
-                msg.append(count).append(".").append(t.toString()).append("\n");
-                count++;
+
+            if (!t.hasText(text)) {
+                continue;
             }
+
+            msg.append(count).append(".").append(t.toString()).append("\n");
+            count++;
         }
+
         return msg.toString();
     }
 
@@ -138,9 +158,11 @@ public class TaskList {
      */
     public String save() {
         StringBuilder msg = new StringBuilder();
+
         for (Task task : this.tasks) {
             msg.append(task.save()).append("\n");
         }
+
         return msg.toString();
     }
 

@@ -73,11 +73,14 @@ public class MainWindow extends AnchorPane {
         String input = this.userInput.getText();
         String response = this.jaiden.getResponse(input);
         CommandType commandType = this.jaiden.getCommandType();
+
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
                 DialogBox.getJaidenDialog(response, this.jaidenImage, commandType)
         );
+
         this.userInput.clear();
+
         if (commandType.equals(CommandType.EXITCOMMAND)) {
             Platform.exit();
         }

@@ -23,14 +23,22 @@ public class ListCommand extends Command {
      * @inheritDoc
      */
     public void execute(TaskList taskList, Storage storage) {
-        if (inputs[0].equals("list")) {
+        switch (inputs[0]) {
+        case "list":
             this.string = taskList.list();
-        } else if (inputs[0].equals("show")) {
+            break;
+        case "show":
             LocalDate showDate = LocalDate.parse(inputs[1]);
             this.string = taskList.show(showDate);
-        } else {
+            break;
+        case "find":
             this.string = taskList.find(inputs[1]);
+            break;
+        default:
+            this.string = "";
+            break;
         }
+
         storage.save(taskList);
     }
 }
