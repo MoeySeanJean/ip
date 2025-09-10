@@ -19,6 +19,8 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate from, LocalDate to) {
         super(description);
+        assert from != null;
+        assert to != null;
         this.from = from;
         this.to = to;
     }
@@ -33,6 +35,8 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, LocalDate from, LocalDate to) {
         super(description, isDone);
+        assert from != null;
+        assert to != null;
         this.from = from;
         this.to = to;
     }
@@ -44,6 +48,7 @@ public class Event extends Task {
      * @return True if the date is between the task start date and end date.
      */
     public boolean isBetween(LocalDate d) {
+        assert d != null;
         return (this.from.isBefore(d) || this.from.isEqual(d)) && (this.to.isAfter(d) || this.to.isEqual(d));
     }
 

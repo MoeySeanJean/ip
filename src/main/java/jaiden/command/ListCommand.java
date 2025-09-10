@@ -31,6 +31,7 @@ public class ListCommand extends Command {
         } else {
             this.string = taskList.find(inputs[1]);
         }
+        assert this.string != null;
         storage.save(taskList);
     }
 }

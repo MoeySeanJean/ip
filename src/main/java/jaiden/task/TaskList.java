@@ -24,6 +24,7 @@ public class TaskList {
      * @param tasks List of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null;
         this.tasks = tasks;
     }
 
@@ -47,6 +48,7 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String mark(int index) {
+        assert index >= 0 && index < this.tasks.size();
         this.tasks.get(index).markAsDone();
         return "Nice! I've marked this task as done:\n" + this.tasks.get(index).toString();
     }
@@ -58,6 +60,7 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String unmark(int index) {
+        assert index >= 0 && index < this.tasks.size();
         this.tasks.get(index).markAsNotDone();
         return "OK, I've marked this task as not done yet:\n" + this.tasks.get(index).toString();
     }
@@ -69,6 +72,7 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String add(Task task) {
+        assert task != null;
         this.tasks.add(task);
         return "Got it. I've added this task:\n" + task.toString() + "\n"
                 + "Now you have " + this.tasks.size() + " tasks in the list.";
@@ -81,6 +85,7 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String remove(int index) {
+        assert index >= 0 && index < this.tasks.size();
         Task task = this.tasks.remove(index);
         return "Noted. I've removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + this.tasks.size() + " tasks in the list.";
@@ -93,6 +98,7 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String show(LocalDate showDate) {
+        assert showDate != null;
         StringBuilder msg = new StringBuilder("Here are the tasks on "
                 + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
         for (int i = 0, count = 1; i < this.tasks.size(); i++) {
@@ -121,6 +127,7 @@ public class TaskList {
      * @return Message to be shown.
      */
     public String find(String text) {
+        assert text != null;
         StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:\n");
         IntStream.range(0, this.tasks.size())
                 .filter(i -> this.tasks.get(i).hasText(text))
