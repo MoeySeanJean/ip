@@ -35,8 +35,8 @@ public class ChangeMarkCommand extends Command {
             this.string = "";
             break;
         }
-
         assert this.string != null;
+
         storage.save(taskList);
     }
 }
