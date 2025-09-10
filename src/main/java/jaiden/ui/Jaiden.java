@@ -21,6 +21,7 @@ public class Jaiden {
      * @param filePath File path to save data in txt format.
      */
     public Jaiden(String filePath) {
+        assert filePath != null;
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(this.storage.load());
@@ -34,10 +35,12 @@ public class Jaiden {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
+        assert input != null;
         try {
             Command c = Parser.parse(input.split(" "));
             c.execute(this.tasks, this.storage);
             this.commandType = c.getCommandType();
+            assert this.commandType != null;
             return c.getString();
         } catch (JaidenException e) {
             this.commandType = CommandType.ERRORCOMMAND;

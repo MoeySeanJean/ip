@@ -19,6 +19,7 @@ public abstract class Command {
      * @param inputs User input.
      */
     public Command(String[] inputs) {
+        assert inputs.length > 0;
         this.inputs = inputs;
     }
 
@@ -34,6 +35,7 @@ public abstract class Command {
      * Gets string.
      */
     public String getString() {
+        assert this.string != null;
         return this.string;
     }
 
@@ -43,6 +45,7 @@ public abstract class Command {
      * @return Command type.
      */
     public CommandType getCommandType() {
+        assert this.commandType != null;
         return this.commandType;
     }
 
