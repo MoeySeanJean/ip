@@ -41,6 +41,7 @@ public class MainWindow extends AnchorPane {
      * Injects the Jaiden instance.
      */
     public void setJaiden(Jaiden jaiden) {
+        assert jaiden != null;
         this.jaiden = jaiden;
     }
 
@@ -71,8 +72,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = this.userInput.getText();
+        assert !input.isEmpty();
         String response = this.jaiden.getResponse(input);
+        assert response != null;
         CommandType commandType = this.jaiden.getCommandType();
+        assert commandType != null;
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
                 DialogBox.getJaidenDialog(response, this.jaidenImage, commandType)

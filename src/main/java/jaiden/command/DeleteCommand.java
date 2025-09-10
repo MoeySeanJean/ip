@@ -22,7 +22,9 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         int index = Integer.parseInt(inputs[1]) - 1;
+        assert index >= 0;
         this.string = taskList.remove(index);
+        assert this.string != null;
         storage.save(taskList);
     }
 }

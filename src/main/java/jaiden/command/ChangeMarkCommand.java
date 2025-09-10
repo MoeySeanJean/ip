@@ -22,11 +22,13 @@ public class ChangeMarkCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         int index = Integer.parseInt(inputs[1]) - 1;
+        assert index >= 0;
         if (inputs[0].equals("mark")) {
             this.string = taskList.mark(index);
         } else {
             this.string = taskList.unmark(index);
         }
+        assert this.string != null;
         storage.save(taskList);
     }
 }

@@ -28,6 +28,7 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         String description = inputs[1];
+        assert !description.isBlank();
         Task task;
         if (inputs[0].equals("todo")) {
             task = new Todo(description);
@@ -40,6 +41,7 @@ public class AddCommand extends Command {
             task = new Event(description, from, to);
         }
         this.string = taskList.add(task);
+        assert this.string != null;
         storage.save(taskList);
     }
 }
