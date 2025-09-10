@@ -23,11 +23,19 @@ public class ChangeMarkCommand extends Command {
     public void execute(TaskList taskList, Storage storage) {
         int index = Integer.parseInt(inputs[1]) - 1;
         assert index >= 0;
-        if (inputs[0].equals("mark")) {
+
+        switch (inputs[0]) {
+        case "mark":
             this.string = taskList.mark(index);
-        } else {
+            break;
+        case "unmark":
             this.string = taskList.unmark(index);
+            break;
+        default:
+            this.string = "";
+            break;
         }
+
         assert this.string != null;
         storage.save(taskList);
     }

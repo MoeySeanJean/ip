@@ -46,7 +46,7 @@ public class ChangeMarkCommandTest {
         command1.execute(test1, new Storage("data/test.txt"));
         assertEquals("Nice! I've marked this task as done:\n[T][X] test", command1.getString());
 
-        String[] commands2 = {"umark", "1"};
+        String[] commands2 = {"unmark", "1"};
         ArrayList<Task> tasks2 = new ArrayList<>();
         tasks2.add(new Todo("test"));
         TaskList test2 = new TaskList(tasks2);

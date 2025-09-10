@@ -38,25 +38,25 @@ public class JaidenTest {
         assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(",
                 jaiden.getResponse("test"));
         assertEquals("Bye. Hope to see you again soon!", jaiden.getResponse("bye"));
-        assertEquals("Error: OOPS!!! The description of a todo cannot be empty.",
+        assertEquals("OOPS!!! The description of a todo cannot be empty.",
                 jaiden.getResponse("todo"));
-        assertEquals("Error: OOPS!!! The description of a deadline cannot be empty.",
+        assertEquals("OOPS!!! The description of a deadline cannot be empty.",
                 jaiden.getResponse("deadline"));
-        assertEquals("Error: OOPS!!! The by of a deadline cannot be empty.",
+        assertEquals("OOPS!!! The by of a deadline cannot be empty.",
                 jaiden.getResponse("deadline test"));
-        assertEquals("Error: OOPS!!! The description of a event cannot be empty.",
+        assertEquals("OOPS!!! The description of a event cannot be empty.",
                 jaiden.getResponse("event"));
-        assertEquals("Error: OOPS!!! The from of a event cannot be empty.",
+        assertEquals("OOPS!!! The from of a event cannot be empty.",
                 jaiden.getResponse("event test"));
-        assertEquals("Error: OOPS!!! The to of a event cannot be empty.",
+        assertEquals("OOPS!!! The to of a event cannot be empty.",
                 jaiden.getResponse("event test /from 2025-08-22"));
-        assertEquals("Error: OOPS!!! The index of a mark cannot be empty.", jaiden.getResponse("mark"));
-        assertEquals("Error: OOPS!!! The index of a unmark cannot be empty.",
+        assertEquals("OOPS!!! The index of a mark cannot be empty.", jaiden.getResponse("mark"));
+        assertEquals("OOPS!!! The index of a unmark cannot be empty.",
                 jaiden.getResponse("unmark"));
-        assertEquals("Error: OOPS!!! The index of a delete cannot be empty.",
+        assertEquals("OOPS!!! The index of a delete cannot be empty.",
                 jaiden.getResponse("delete"));
-        assertEquals("Error: OOPS!!! The date of a show cannot be empty.", jaiden.getResponse("show"));
-        assertEquals("Error: OOPS!!! The text of a find cannot be empty.", jaiden.getResponse("find"));
+        assertEquals("OOPS!!! The date of a show cannot be empty.", jaiden.getResponse("show"));
+        assertEquals("OOPS!!! The text of a find cannot be empty.", jaiden.getResponse("find"));
     }
 
     @Test

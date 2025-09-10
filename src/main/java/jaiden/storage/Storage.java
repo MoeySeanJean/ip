@@ -40,46 +40,122 @@ public class Storage {
     public ArrayList<Task> load() throws JaidenException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner dataReader;
+
         if (!this.data.exists()) {
             boolean isCreated = new File("./data").mkdir();
             assert isCreated;
-        } else {
-            try {
-                dataReader = new Scanner(this.data);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            while (dataReader.hasNextLine()) {
-                String line = dataReader.nextLine();
-                String[] temp = line.split(" \\| ");
-                if (temp.length == 0) {
-                    throw new JaidenException("The data file is corrupted (Content not in the expected format).");
-                } else if (temp[0].equals("T")) {
-                    if (temp.length != 3 || !(temp[1].equals("0") || temp[1].equals("1")) || temp[2].isBlank()) {
-                        throw new JaidenException("The data file is corrupted (Content not in the expected format).");
-                    }
-                    tasks.add(new Todo(temp[2], temp[1].equals("1")));
-                } else if (temp[0].equals("D")) {
-                    if (temp.length != 4
-                            || !(temp[1].equals("0") || temp[1].equals("1"))
-                                || temp[2].isBlank() || temp[3].isBlank()) {
-                        throw new JaidenException("The data file is corrupted (Content not in the expected format).");
-                    }
-                    tasks.add(new Deadline(temp[2], temp[1].equals("1"), LocalDate.parse(temp[3])));
-                } else if (temp[0].equals("E")) {
-                    if (temp.length != 5
-                            || !(temp[1].equals("0") || temp[1].equals("1"))
-                                || temp[2].isBlank() || temp[3].isBlank() || temp[4].isBlank()) {
-                        throw new JaidenException("The data file is corrupted (Content not in the expected format).");
-                    }
-                    tasks.add(new Event(temp[2], temp[1].equals("1"),
-                            LocalDate.parse(temp[3]), LocalDate.parse(temp[4])));
-                } else {
-                    throw new JaidenException("The data file is corrupted (Content not in the expected format).");
-                }
+        }
+
+        try {
+            dataReader = new Scanner(this.data);
+        } catch (FileNotFoundException e) {
+            throw new JaidenException(e.getMessage());
+        }
+
+        while (dataReader.hasNextLine()) {
+            String line = dataReader.nextLine();
+            String[] temp = line.split(" \\| ");
+
+            boolean isTodo = temp[0].equals("T");
+            boolean isDeadline = temp[0].equals("D");
+            boolean isEvent = temp[0].equals("E");
+
+            if (isTodo) {
+                Todo newTodo = getTodo(temp);
+                tasks.add(newTodo);
+            } else if (isDeadline) {
+                Deadline newDeadline = getDeadline(temp);
+                tasks.add(newDeadline);
+            } else if (isEvent) {
+                Event newEvent = getEvent(temp);
+                tasks.add(newEvent);
+            } else {
+                throw new JaidenException("The data file is corrupted (Content not in the expected format).");
             }
         }
+
         return tasks;
+    }
+
+    private static Todo getTodo(String[] temp) throws JaidenException {
+        if (!isCorrectTodoFormat(temp)) {
+            throw new JaidenException("The data file is corrupted (Content not in the expected format).");
+        }
+
+        String description = temp[2];
+        boolean isDone = temp[1].equals("1");
+
+        return new Todo(description, isDone);
+    }
+
+    private static boolean isCorrectTodoFormat(String[] temp) {
+        boolean hasCorrectLength = temp.length == 3;
+        boolean hasCorrectStatus = false;
+        boolean hasDescription = false;
+
+        if (hasCorrectLength) {
+            hasCorrectStatus = temp[1].equals("0") || temp[1].equals("1");
+            hasDescription = !temp[2].isBlank();
+        }
+
+        return hasCorrectLength && hasCorrectStatus && hasDescription;
+    }
+
+    private static Deadline getDeadline(String[] temp) throws JaidenException {
+        if (!isCorrectDeadlineFormat(temp)) {
+            throw new JaidenException("The data file is corrupted (Content not in the expected format).");
+        }
+
+        String description = temp[2];
+        boolean isDone = temp[1].equals("1");
+        LocalDate deadline = LocalDate.parse(temp[3]);
+
+        return new Deadline(description, isDone, deadline);
+    }
+
+    private static boolean isCorrectDeadlineFormat(String[] temp) {
+        boolean hasCorrectLength = temp.length == 4;
+        boolean hasCorrectStatus = false;
+        boolean hasDescription = false;
+        boolean hasDeadline = false;
+
+        if (hasCorrectLength) {
+            hasCorrectStatus = temp[1].equals("0") || temp[1].equals("1");
+            hasDescription = !temp[2].isBlank();
+            hasDeadline = !temp[3].isBlank();
+        }
+
+        return hasCorrectLength && hasCorrectStatus && hasDescription && hasDeadline;
+    }
+
+    private static Event getEvent(String[] temp) throws JaidenException {
+        if (!isCorrectEventFormat(temp)) {
+            throw new JaidenException("The data file is corrupted (Content not in the expected format).");
+        }
+
+        String description = temp[2];
+        boolean isDone = temp[1].equals("1");
+        LocalDate from = LocalDate.parse(temp[3]);
+        LocalDate to = LocalDate.parse(temp[4]);
+
+        return new Event(description, isDone, from, to);
+    }
+
+    private static boolean isCorrectEventFormat(String[] temp) {
+        boolean hasCorrectLength = temp.length == 5;
+        boolean hasCorrectStatus = false;
+        boolean hasDescription = false;
+        boolean hasFrom = false;
+        boolean hasTo = false;
+
+        if (hasCorrectLength) {
+            hasCorrectStatus = temp[1].equals("0") || temp[1].equals("1");
+            hasDescription = !temp[2].isBlank();
+            hasFrom = !temp[3].isBlank();
+            hasTo = !temp[4].isBlank();
+        }
+
+        return hasCorrectLength && hasCorrectStatus && hasDescription && hasFrom && hasTo;
     }
 
     /**
@@ -90,8 +166,10 @@ public class Storage {
     public void save(TaskList tasks) {
         try {
             FileWriter dataWriter = new FileWriter(this.data);
+
             String msg = tasks.save();
             assert msg != null;
+
             dataWriter.write(msg);
             dataWriter.close();
         } catch (IOException e) {

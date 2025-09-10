@@ -22,6 +22,7 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         this.string = "Bye. Hope to see you again soon!";
+
         storage.save(taskList);
     }
 }

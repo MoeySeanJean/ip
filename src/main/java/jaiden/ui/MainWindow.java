@@ -41,7 +41,6 @@ public class MainWindow extends AnchorPane {
      * Injects the Jaiden instance.
      */
     public void setJaiden(Jaiden jaiden) {
-        assert jaiden != null;
         this.jaiden = jaiden;
     }
 
@@ -77,11 +76,14 @@ public class MainWindow extends AnchorPane {
         assert response != null;
         CommandType commandType = this.jaiden.getCommandType();
         assert commandType != null;
+
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
                 DialogBox.getJaidenDialog(response, this.jaidenImage, commandType)
         );
+
         this.userInput.clear();
+
         if (commandType.equals(CommandType.EXITCOMMAND)) {
             Platform.exit();
         }
