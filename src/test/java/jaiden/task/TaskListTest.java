@@ -81,9 +81,9 @@ public class TaskListTest {
     }
 
     @Test
-    public void showTest() {
+    public void viewTest() {
         assertEquals("Here are the tasks on Aug 22 2025 in your list:\n",
-                new TaskList().show(LocalDate.parse("2025-08-22")));
+                new TaskList().view(LocalDate.parse("2025-08-22")));
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Deadline("test", LocalDate.parse("2025-08-22")));
         tasks.add(new Event("test", LocalDate.parse("2025-08-22"), LocalDate.parse("2025-08-22")));
@@ -91,7 +91,7 @@ public class TaskListTest {
         tasks.add(new Event("test", LocalDate.parse("2024-08-22"), LocalDate.parse("2024-08-22")));
         assertEquals("Here are the tasks on Aug 22 2025 in your list:\n"
                 + "1.[D][ ] test (by: Aug 22 2025)\n2.[E][ ] test (from: Aug 22 2025 to: Aug 22 2025)\n",
-                new TaskList(tasks).show(LocalDate.parse("2025-08-22")));
+                new TaskList(tasks).view(LocalDate.parse("2025-08-22")));
     }
 
     @Test

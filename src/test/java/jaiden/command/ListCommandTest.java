@@ -35,7 +35,7 @@ public class ListCommandTest {
         command1.execute(test, new Storage("data/test.txt"));
         assertEquals("Here are the tasks in your list:\n", command1.getString());
 
-        String[] commands2 = {"show", "2025-08-22"};
+        String[] commands2 = {"view", "2025-08-22"};
         Command command2 = new ListCommand(commands2);
         command2.execute(test, new Storage("data/test.txt"));
         assertEquals("Here are the tasks on Aug 22 2025 in your list:\n", command2.getString());

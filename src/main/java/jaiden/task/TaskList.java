@@ -100,13 +100,13 @@ public class TaskList {
     /**
      * Shows a list of tasks on a date.
      *
-     * @param showDate Date.
+     * @param viewDate Date.
      * @return Message to be shown.
      */
-    public String show(LocalDate showDate) {
-        assert showDate != null;
+    public String view(LocalDate viewDate) {
+        assert viewDate != null;
         StringBuilder msg = new StringBuilder("Here are the tasks on "
-                + showDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
+                + viewDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " in your list:\n");
 
         for (int i = 0, count = 1; i < this.tasks.size(); i++) {
             Task t = this.tasks.get(i);
@@ -114,7 +114,7 @@ public class TaskList {
             if (t.getClass() == Deadline.class) {
                 Deadline d = (Deadline) t;
 
-                if (!d.isBy(showDate)) {
+                if (!d.isBy(viewDate)) {
                     continue;
                 }
 
@@ -123,7 +123,7 @@ public class TaskList {
             } else if (t.getClass() == Event.class) {
                 Event e = (Event) t;
 
-                if (!e.isBetween(showDate)) {
+                if (!e.isBetween(viewDate)) {
                     continue;
                 }
 
