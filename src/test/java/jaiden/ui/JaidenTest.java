@@ -27,7 +27,7 @@ public class JaidenTest {
         assertEquals("Here are the tasks in your list:\n1.[T][ ] read\n2.[D][ ] read (by: Aug 22 2025)\n"
                 + "3.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("list"));
         assertEquals("Here are the tasks on Aug 22 2025 in your list:\n1.[D][ ] read (by: Aug 22 2025)\n"
-                + "2.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("show 2025-08-22"));
+                + "2.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("view 2025-08-22"));
         assertEquals("Here are the matching tasks in your list:\n1.[T][ ] read\n2.[D][ ] read (by: Aug 22 2025)\n"
                 + "3.[E][ ] read (from: Aug 22 2025 to: Aug 22 2025)\n", jaiden.getResponse("find read"));
         assertEquals("Nice! I've marked this task as done:\n[T][X] read", jaiden.getResponse("mark 1"));
@@ -55,7 +55,7 @@ public class JaidenTest {
                 jaiden.getResponse("unmark"));
         assertEquals("OOPS!!! The index of a delete cannot be empty.",
                 jaiden.getResponse("delete"));
-        assertEquals("OOPS!!! The date of a show cannot be empty.", jaiden.getResponse("show"));
+        assertEquals("OOPS!!! The date of a view cannot be empty.", jaiden.getResponse("view"));
         assertEquals("OOPS!!! The text of a find cannot be empty.", jaiden.getResponse("find"));
     }
 
@@ -70,7 +70,7 @@ public class JaidenTest {
         assertEquals(CommandType.ADDCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("list");
         assertEquals(CommandType.LISTCOMMAND, jaiden.getCommandType());
-        jaiden.getResponse("show 2025-08-22");
+        jaiden.getResponse("view 2025-08-22");
         assertEquals(CommandType.LISTCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("find read");
         assertEquals(CommandType.LISTCOMMAND, jaiden.getCommandType());

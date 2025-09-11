@@ -31,7 +31,7 @@ public class Parser {
         checkInputFormat(commandType, parsedInputs);
 
         return switch (commandType) {
-        case "list", "show", "find" -> new ListCommand(parsedInputs.toArray(new String[0]));
+        case "list", "view", "find" -> new ListCommand(parsedInputs.toArray(new String[0]));
         case "mark", "unmark" -> new ChangeMarkCommand(parsedInputs.toArray(new String[0]));
         case "todo", "deadline", "event" -> new AddCommand(parsedInputs.toArray(new String[0]));
         case "delete" -> new DeleteCommand(parsedInputs.toArray(new String[0]));
@@ -97,9 +97,9 @@ public class Parser {
                 throw new JaidenException("OOPS!!! The index of a delete cannot be empty.");
             }
             break;
-        case "show":
+        case "view":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The date of a show cannot be empty.");
+                throw new JaidenException("OOPS!!! The date of a view cannot be empty.");
             }
             break;
         case "find":

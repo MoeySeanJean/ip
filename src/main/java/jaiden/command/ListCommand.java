@@ -27,9 +27,9 @@ public class ListCommand extends Command {
         case "list":
             this.string = taskList.list();
             break;
-        case "show":
-            LocalDate showDate = LocalDate.parse(inputs[1]);
-            this.string = taskList.show(showDate);
+        case "view":
+            LocalDate viewDate = LocalDate.parse(inputs[1]);
+            this.string = taskList.view(viewDate);
             break;
         case "find":
             this.string = taskList.find(inputs[1]);
