@@ -16,8 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
+ * Represents a dialog box consisting of an ImageView to represent
+ * the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -25,12 +25,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    /**
-     * Constructor for dialog box.
-     *
-     * @param text Text to display.
-     * @param img Image to display.
-     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -52,18 +46,29 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-        this.dialog.getStyleClass().add("reply-label");
     }
 
     /**
-     * Changes dialog box style.
-     *
-     * @param commandType Type of command.
+     * Apply different style classes depending on speaker.
      */
-    private void changeDialogStyle(CommandType commandType) {
-        assert commandType != null;
-        switch(commandType) {
+    private void applyBaseStyle(boolean isUser) {
+        if (isUser) {
+            setAlignment(Pos.TOP_RIGHT);
+            this.dialog.getStyleClass().add("user-label");
+        } else {
+            setAlignment(Pos.TOP_LEFT);
+            this.dialog.getStyleClass().add("bot-label");
+        }
+    }
+
+    /**
+     * Overlay additional styles depending on command type (errors, add, delete, etc.).
+     */
+    private void applyCommandStyle(CommandType commandType) {
+        if (commandType == null) {
+            return;
+        }
+        switch (commandType) {
         case ADDCOMMAND:
             this.dialog.getStyleClass().add("add-label");
             break;
@@ -89,32 +94,21 @@ public class DialogBox extends HBox {
 
     /**
      * Gets user dialog box.
-     *
-     * @param text Text to display.
-     * @param img Image to display.
-     * @return User dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        assert text != null;
-        assert img != null;
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.applyBaseStyle(true);
+        return db;
     }
 
     /**
-     * Gets jaiden dialog box.
-     *
-     * @param text Text to display.
-     * @param img Image to display.
-     * @param commandType Type of command.
-     * @return Jaiden dialog box.
+     * Gets bot (Jaiden) dialog box.
      */
     public static DialogBox getJaidenDialog(String text, Image img, CommandType commandType) {
-        assert text != null;
-        assert img != null;
-        assert commandType != null;
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
-        db.changeDialogStyle(commandType);
+        db.applyBaseStyle(false);
+        db.applyCommandStyle(commandType);
         return db;
     }
 }

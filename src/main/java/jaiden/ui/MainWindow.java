@@ -29,8 +29,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Initializes the controller after its root element has been completely loaded.
-     * Binds the vertical scroll value of the scroll pane to the height of the dialog container,
-     * ensuring the scroll pane automatically scrolls to the bottom whenever new content is added.
+     * Ensures auto-scroll to bottom when new messages are added.
      */
     @FXML
     private void initialize() {
@@ -48,9 +47,12 @@ public class MainWindow extends AnchorPane {
      * Shows welcome message.
      */
     public void showWelcome() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getJaidenDialog("Hello! I'm Jaiden\nWhat can I do for you?", this.jaidenImage,
-                        CommandType.NULLCOMMAND)
+        dialogContainer.getChildren().add(
+                DialogBox.getJaidenDialog(
+                        "Hello! I'm Jaiden 👋\nWhat can I do for you?",
+                        this.jaidenImage,
+                        CommandType.NULLCOMMAND
+                )
         );
     }
 
@@ -58,34 +60,56 @@ public class MainWindow extends AnchorPane {
      * Shows loading error.
      */
     public void showLoadingError() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getJaidenDialog("The data file is corrupted (Content not in the expected format).",
-                        this.jaidenImage, CommandType.ERRORCOMMAND)
+        dialogContainer.getChildren().add(
+                DialogBox.getJaidenDialog(
+                        "⚠️ The data file is corrupted (Content not in the expected format).",
+                        this.jaidenImage,
+                        CommandType.ERRORCOMMAND
+                )
         );
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Jaiden's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input, generates response, and updates dialog container.
      */
     @FXML
     private void handleUserInput() {
-        String input = this.userInput.getText();
-        assert !input.isEmpty();
-        String response = this.jaiden.getResponse(input);
-        assert response != null;
-        CommandType commandType = this.jaiden.getCommandType();
-        assert commandType != null;
+        String input = this.userInput.getText().trim();
 
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getJaidenDialog(response, this.jaidenImage, commandType)
-        );
+        if (input.isEmpty()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getJaidenDialog(
+                            "⚠️ Please enter a command.",
+                            this.jaidenImage,
+                            CommandType.ERRORCOMMAND
+                    )
+            );
+            userInput.clear();
+            return;
+        }
 
-        this.userInput.clear();
+        try {
+            String response = this.jaiden.getResponse(input);
+            CommandType commandType = this.jaiden.getCommandType();
 
-        if (commandType.equals(CommandType.EXITCOMMAND)) {
-            Platform.exit();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, this.userImage),
+                    DialogBox.getJaidenDialog(response, this.jaidenImage, commandType)
+            );
+
+            userInput.clear();
+
+            if (commandType.equals(CommandType.EXITCOMMAND)) {
+                Platform.exit();
+            }
+        } catch (Exception e) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getJaidenDialog(
+                            "⚠️ Oops, something went wrong: " + e.getMessage(),
+                            this.jaidenImage,
+                            CommandType.ERRORCOMMAND
+                    )
+            );
         }
     }
 }
