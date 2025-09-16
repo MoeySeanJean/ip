@@ -14,7 +14,7 @@ import jaiden.task.Todo;
 
 public class AddCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws Exception {
         String[] commands1 = {"todo", "test"};
         TaskList test1 = new TaskList();
         new AddCommand(commands1).execute(test1, new Storage("data/test.txt"));
@@ -41,7 +41,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void getStringTest() {
+    public void getStringTest() throws Exception {
         String[] commands1 = {"todo", "test"};
         TaskList test1 = new TaskList();
         Command command1 = new AddCommand(commands1);

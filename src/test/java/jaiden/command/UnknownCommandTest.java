@@ -9,7 +9,7 @@ import jaiden.task.TaskList;
 
 public class UnknownCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws Exception {
         String[] commands = {"test"};
         TaskList test = new TaskList();
         new UnknownCommand(commands).execute(test, new Storage("data/test.txt"));
@@ -17,7 +17,7 @@ public class UnknownCommandTest {
     }
 
     @Test
-    public void getStringTest() {
+    public void getStringTest() throws Exception {
         String[] commands = {"test"};
         TaskList test = new TaskList();
         Command command = new UnknownCommand(commands);

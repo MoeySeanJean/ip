@@ -2,6 +2,7 @@ package jaiden.command;
 
 import java.time.LocalDate;
 
+import jaiden.exception.JaidenException;
 import jaiden.storage.Storage;
 import jaiden.task.Deadline;
 import jaiden.task.Event;
@@ -26,7 +27,7 @@ public class AddCommand extends Command {
     /**
      * @inheritDoc
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) throws JaidenException {
         String description = inputs[1];
         assert !description.isBlank();
 

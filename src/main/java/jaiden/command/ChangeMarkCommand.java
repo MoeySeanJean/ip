@@ -1,5 +1,6 @@
 package jaiden.command;
 
+import jaiden.exception.JaidenException;
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 
@@ -20,7 +21,7 @@ public class ChangeMarkCommand extends Command {
     /**
      * @inheritDoc
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) throws JaidenException {
         int index = Integer.parseInt(inputs[1]) - 1;
         assert index >= 0;
 

@@ -10,7 +10,7 @@ import jaiden.task.TaskList;
 
 public class ListCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws Exception {
         TaskList test = new TaskList();
 
         String[] commands1 = {"list"};
@@ -27,7 +27,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void getStringTest() {
+    public void getStringTest() throws Exception {
         TaskList test = new TaskList();
 
         String[] commands1 = {"list"};

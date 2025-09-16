@@ -2,6 +2,7 @@ package jaiden.command;
 
 import java.util.Arrays;
 
+import jaiden.exception.JaidenException;
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 
@@ -29,7 +30,7 @@ public abstract class Command {
      * @param taskList Task list.
      * @param storage Storage to save current data.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract void execute(TaskList taskList, Storage storage) throws JaidenException;
 
     /**
      * Gets string.

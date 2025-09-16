@@ -1,5 +1,6 @@
 package jaiden.command;
 
+import jaiden.exception.JaidenException;
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 
@@ -20,7 +21,7 @@ public class UnknownCommand extends Command {
     /**
      * @inheritDoc
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) throws JaidenException {
         this.string = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
         storage.save(taskList);

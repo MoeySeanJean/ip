@@ -2,6 +2,7 @@ package jaiden.command;
 
 import java.time.LocalDate;
 
+import jaiden.exception.JaidenException;
 import jaiden.storage.Storage;
 import jaiden.task.TaskList;
 
@@ -22,7 +23,7 @@ public class ListCommand extends Command {
     /**
      * @inheritDoc
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) throws JaidenException {
         switch (inputs[0]) {
         case "list":
             this.string = taskList.list();

@@ -59,10 +59,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Shows loading error.
      */
-    public void showLoadingError() {
+    public void showLoadingError(String message) {
         dialogContainer.getChildren().add(
                 DialogBox.getJaidenDialog(
-                        "⚠️ The data file is corrupted (Content not in the expected format).",
+                        message,
                         this.jaidenImage,
                         CommandType.ERRORCOMMAND
                 )
@@ -79,7 +79,7 @@ public class MainWindow extends AnchorPane {
         if (input.isEmpty()) {
             dialogContainer.getChildren().add(
                     DialogBox.getJaidenDialog(
-                            "⚠️ Please enter a command.",
+                            "⚠ Please enter a command.",
                             this.jaidenImage,
                             CommandType.ERRORCOMMAND
                     )
@@ -105,7 +105,7 @@ public class MainWindow extends AnchorPane {
         } catch (Exception e) {
             dialogContainer.getChildren().add(
                     DialogBox.getJaidenDialog(
-                            "⚠️ Oops, something went wrong: " + e.getMessage(),
+                            "⚠ Oops, something went wrong: " + e.getMessage(),
                             this.jaidenImage,
                             CommandType.ERRORCOMMAND
                     )

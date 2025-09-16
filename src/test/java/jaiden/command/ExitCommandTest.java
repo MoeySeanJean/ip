@@ -9,7 +9,7 @@ import jaiden.task.TaskList;
 
 public class ExitCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws Exception {
         String[] commands = {"bye"};
         TaskList test = new TaskList();
         new ExitCommand(commands).execute(test, new Storage("data/test.txt"));
@@ -17,7 +17,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    public void getStringTest() {
+    public void getStringTest() throws Exception {
         String[] commands = {"bye"};
         TaskList test = new TaskList();
         Command command = new ExitCommand(commands);
