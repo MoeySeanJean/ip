@@ -22,7 +22,8 @@ public class UnknownCommandTest {
         TaskList test = new TaskList();
         Command command = new UnknownCommand(commands);
         command.execute(test, new Storage("data/test.txt"));
-        assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", command.getString());
+        assertEquals("Oopsie! \uD83D\uDE05 I’m not too sure what that means… could you help me out?",
+                command.getString());
     }
 
     @Test

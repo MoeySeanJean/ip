@@ -36,28 +36,31 @@ public class JaidenTest {
                 jaiden.getResponse("unmark 1"));
         assertEquals("Noted. I've removed this task:\n[T][ ] read\nNow you have 2 tasks in the list.",
                 jaiden.getResponse("delete 1"));
-        assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(",
+        assertEquals("Oopsie! \uD83D\uDE05 I’m not too sure what that means… could you help me out?",
                 jaiden.getResponse("test"));
         assertEquals("Bye. Hope to see you again soon!", jaiden.getResponse("bye"));
-        assertEquals("OOPS!!! The description of a todo cannot be empty.",
-                jaiden.getResponse("todo"));
-        assertEquals("OOPS!!! The description of a deadline cannot be empty.",
-                jaiden.getResponse("deadline"));
-        assertEquals("OOPS!!! The by of a deadline cannot be empty.",
-                jaiden.getResponse("deadline test"));
-        assertEquals("OOPS!!! The description of a event cannot be empty.",
-                jaiden.getResponse("event"));
-        assertEquals("OOPS!!! The from of a event cannot be empty.",
-                jaiden.getResponse("event test"));
-        assertEquals("OOPS!!! The to of a event cannot be empty.",
-                jaiden.getResponse("event test /from 2025-08-22"));
-        assertEquals("OOPS!!! The index of a mark cannot be empty.", jaiden.getResponse("mark"));
-        assertEquals("OOPS!!! The index of a unmark cannot be empty.",
-                jaiden.getResponse("unmark"));
-        assertEquals("OOPS!!! The index of a delete cannot be empty.",
-                jaiden.getResponse("delete"));
-        assertEquals("OOPS!!! The date of a view cannot be empty.", jaiden.getResponse("view"));
-        assertEquals("OOPS!!! The text of a find cannot be empty.", jaiden.getResponse("find"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the description of a todo is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("todo"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the description of a deadline is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("deadline"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the deadline of a deadline is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("deadline test"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the description of a event is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("event"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the from of a event is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("event test"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the to of a event is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("event test /from 2025-08-22"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the index of a mark is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("mark"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the index of a unmark is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("unmark"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the index of a delete is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("delete"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the date of a view is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("view"));
+        assertEquals("Oops! \uD83D\uDE05 Looks like the keyword of a find is missing. "
+                + "Could you fill that in for me?", jaiden.getResponse("find"));
     }
 
     @Test

@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Jaiden using FXML.
  */
 public class Main extends Application {
     private static final int STAGE_HEIGHT = 220;
@@ -29,6 +29,7 @@ public class Main extends Application {
             stage.setMinHeight(STAGE_HEIGHT);
             stage.setMinWidth(STAGE_WIDTH);
             fxmlLoader.<MainWindow>getController().setJaiden(this.jaiden);
+            stage.setTitle("Jaiden");
             stage.show();
 
             if (jaiden.hasLoadError()) {

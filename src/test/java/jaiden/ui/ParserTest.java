@@ -37,8 +37,8 @@ public class ParserTest {
             Parser.parse("todo");
             fail();
         } catch (Exception e) {
-            assertEquals(new JaidenException("OOPS!!! The description of a todo cannot be empty.").getMessage(),
-                    e.getMessage());
+            assertEquals(new JaidenException("Oops! \uD83D\uDE05 Looks like the description of a todo is missing. "
+                            + "Could you fill that in for me?").getMessage(), e.getMessage());
         }
     }
 }

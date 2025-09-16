@@ -62,49 +62,41 @@ public class Parser {
     private static void checkInputFormat(String commandType, List<String> parsedInputs) throws JaidenException {
         switch(commandType) {
         case "mark":
-            if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The index of a mark cannot be empty.");
-            }
-            break;
         case "unmark":
+        case "delete":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The index of a unmark cannot be empty.");
+                throw new JaidenException(errorMessage("index", commandType));
             }
             break;
         case "todo":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The description of a todo cannot be empty.");
+                throw new JaidenException(errorMessage("description", commandType));
             }
             break;
         case "deadline":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The description of a deadline cannot be empty.");
+                throw new JaidenException(errorMessage("description", commandType));
             } else if (hasNoDeadline(parsedInputs) || isBlankArg(parsedInputs, 3)) {
-                throw new JaidenException("OOPS!!! The by of a deadline cannot be empty.");
+                throw new JaidenException(errorMessage("deadline", commandType));
             }
             break;
         case "event":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The description of a event cannot be empty.");
+                throw new JaidenException(errorMessage("description", commandType));
             } else if (hasNoFrom(parsedInputs) || isBlankArg(parsedInputs, 3)) {
-                throw new JaidenException("OOPS!!! The from of a event cannot be empty.");
+                throw new JaidenException(errorMessage("from", commandType));
             } else if (hasNoTo(parsedInputs) || isBlankArg(parsedInputs, 5)) {
-                throw new JaidenException("OOPS!!! The to of a event cannot be empty.");
-            }
-            break;
-        case "delete":
-            if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The index of a delete cannot be empty.");
+                throw new JaidenException(errorMessage("to", commandType));
             }
             break;
         case "view":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The date of a view cannot be empty.");
+                throw new JaidenException(errorMessage("date", commandType));
             }
             break;
         case "find":
             if (hasNoArgs(parsedInputs) || isBlankArg(parsedInputs, 1)) {
-                throw new JaidenException("OOPS!!! The text of a find cannot be empty.");
+                throw new JaidenException(errorMessage("keyword", commandType));
             }
             break;
         default:
@@ -130,5 +122,9 @@ public class Parser {
 
     private static boolean hasNoTo(List<String> parsedInputs) {
         return parsedInputs.size() < 6 || !parsedInputs.get(4).equals("/to");
+    }
+
+    private static String errorMessage(String arg, String command) {
+        return "Oops! 😅 Looks like the " + arg + " of a " + command + " is missing. Could you fill that in for me?";
     }
 }
