@@ -52,7 +52,7 @@ public class StorageTest {
     }
 
     @Test
-    void saveTest() throws Exception {
+    void saveTest_validFile_success() throws Exception {
         Storage storage = new Storage("data/test.txt");
         ArrayList<Task> test = new ArrayList<>();
         test.add(new Todo("test"));
@@ -65,5 +65,23 @@ public class StorageTest {
         assertEquals("T | 0 | test\nD | 0 | test | 2025-08-22\nE | 0 | test | 2025-08-22 | 2025-08-22\n"
                 + "T | 1 | test\nD | 1 | test | 2025-08-22\nE | 1 | test | 2025-08-22 | 2025-08-22",
                 new Scanner(new File("data/test.txt")).useDelimiter("\\Z").next());
+    }
+
+    @Test
+    void saveTest_invalidFile_exceptionThrown() {
+        try {
+            Storage storage = new Storage("data");
+            ArrayList<Task> test = new ArrayList<>();
+            test.add(new Todo("test"));
+            test.add(new Deadline("test", LocalDate.parse("2025-08-22")));
+            test.add(new Event("test", LocalDate.parse("2025-08-22"), LocalDate.parse("2025-08-22")));
+            test.add(new Todo("test", true));
+            test.add(new Deadline("test", true, LocalDate.parse("2025-08-22")));
+            test.add(new Event("test", true, LocalDate.parse("2025-08-22"), LocalDate.parse("2025-08-22")));
+            storage.save(new TaskList(test));
+            fail();
+        } catch (Exception e) {
+            assertEquals(new JaidenException("data (Access is denied)").getMessage(), e.getMessage());
+        }
     }
 }

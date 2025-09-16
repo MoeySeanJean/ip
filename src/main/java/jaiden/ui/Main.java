@@ -20,8 +20,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         assert stage != null;
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             assert ap != null;
             Scene scene = new Scene(ap);
@@ -32,12 +32,13 @@ public class Main extends Application {
             stage.show();
 
             if (jaiden.hasLoadError()) {
-                fxmlLoader.<MainWindow>getController().showLoadingError();
+                fxmlLoader.<MainWindow>getController().showLoadingError(
+                        "⚠ The data file is corrupted (Content not in the expected format).");
             }
 
             fxmlLoader.<MainWindow>getController().showWelcome();
         } catch (IOException e) {
-            e.printStackTrace();
+            fxmlLoader.<MainWindow>getController().showLoadingError("⚠ The source file is corrupted.");
         }
     }
 }

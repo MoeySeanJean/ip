@@ -14,7 +14,7 @@ import jaiden.task.Todo;
 
 public class ChangeMarkCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws Exception {
         String[] commands1 = {"mark", "1"};
         ArrayList<Task> tasks1 = new ArrayList<>();
         tasks1.add(new Todo("test"));
@@ -37,7 +37,7 @@ public class ChangeMarkCommandTest {
     }
 
     @Test
-    public void getStringTest() {
+    public void getStringTest() throws Exception {
         String[] commands1 = {"mark", "1"};
         ArrayList<Task> tasks1 = new ArrayList<>();
         tasks1.add(new Todo("test"));

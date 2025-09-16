@@ -163,7 +163,7 @@ public class Storage {
      *
      * @param tasks Task list to be saved.
      */
-    public void save(TaskList tasks) {
+    public void save(TaskList tasks) throws JaidenException {
         try {
             FileWriter dataWriter = new FileWriter(this.data);
 
@@ -173,7 +173,7 @@ public class Storage {
             dataWriter.write(msg);
             dataWriter.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new JaidenException(e.getMessage());
         }
     }
 }

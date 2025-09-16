@@ -14,7 +14,7 @@ import jaiden.task.Todo;
 
 public class DeleteCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws Exception {
         String[] commands = {"delete", "1"};
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Todo("test"));
@@ -24,7 +24,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void getStringTest() {
+    public void getStringTest() throws Exception {
         String[] commands = {"delete", "1"};
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Todo("test"));
