@@ -22,7 +22,7 @@ public class UnknownCommand extends Command {
      * @inheritDoc
      */
     public void execute(TaskList taskList, Storage storage) throws JaidenException {
-        this.string = "Oopsie! \uD83D\uDE05 I’m not too sure what that means… could you help me out?";
+        this.string = "Oopsie! 😅 I’m not too sure what that means… could you help me out?";
 
         storage.save(taskList);
     }

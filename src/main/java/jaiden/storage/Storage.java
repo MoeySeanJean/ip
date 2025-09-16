@@ -42,8 +42,14 @@ public class Storage {
         Scanner dataReader;
 
         if (!this.data.exists()) {
-            boolean isCreated = new File("./data").mkdir();
-            assert isCreated;
+            boolean isDirCreated = new File("./data").mkdir();
+            assert isDirCreated;
+            try {
+                boolean isFileCreated = this.data.createNewFile();
+                assert isFileCreated;
+            } catch (IOException e) {
+                throw new JaidenException(e.getMessage());
+            }
         }
 
         try {
