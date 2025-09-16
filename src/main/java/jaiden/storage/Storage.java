@@ -173,7 +173,7 @@ public class Storage {
             dataWriter.write(msg);
             dataWriter.close();
         } catch (IOException e) {
-            throw new JaidenException(e.getMessage());
+            throw new JaidenException("Save failed.");
         }
     }
 }

@@ -1,6 +1,7 @@
 package jaiden.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -86,5 +87,11 @@ public class JaidenTest {
         assertEquals(CommandType.ERRORCOMMAND, jaiden.getCommandType());
         jaiden.getResponse("bye");
         assertEquals(CommandType.EXITCOMMAND, jaiden.getCommandType());
+    }
+
+    @Test
+    public void hasLoadErrorTest() {
+        Jaiden jaiden = new Jaiden("data/test.txt");
+        assertFalse(jaiden.hasLoadError());
     }
 }

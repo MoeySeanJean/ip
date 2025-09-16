@@ -26,6 +26,13 @@ public class ExitCommandTest {
     }
 
     @Test
+    public void getCommandTest() {
+        String[] commands = {"bye"};
+        Command command = new ExitCommand(commands);
+        assertEquals(CommandType.EXITCOMMAND, command.getCommandType());
+    }
+
+    @Test
     public void equalsTest() {
         String[] commands1 = {"bye"};
         String[] commands2 = {"bye"};

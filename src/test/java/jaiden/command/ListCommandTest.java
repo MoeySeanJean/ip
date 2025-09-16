@@ -47,6 +47,13 @@ public class ListCommandTest {
     }
 
     @Test
+    public void getCommandTest() {
+        String[] commands = {"list"};
+        Command command = new ListCommand(commands);
+        assertEquals(CommandType.LISTCOMMAND, command.getCommandType());
+    }
+
+    @Test
     public void equalsTest() {
         String[] commands1 = {"list"};
         String[] commands2 = {"list"};
