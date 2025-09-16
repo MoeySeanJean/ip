@@ -65,6 +65,13 @@ public class AddCommandTest {
     }
 
     @Test
+    public void getCommandTest() {
+        String[] commands = {"todo", "test"};
+        Command command = new AddCommand(commands);
+        assertEquals(CommandType.ADDCOMMAND, command.getCommandType());
+    }
+
+    @Test
     public void equalsTest() {
         String[] commands1 = {"todo", "test1"};
         String[] commands2 = {"todo", "test1"};

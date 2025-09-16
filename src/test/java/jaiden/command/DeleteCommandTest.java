@@ -36,6 +36,13 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void getCommandTest() {
+        String[] commands = {"delete", "1"};
+        Command command = new DeleteCommand(commands);
+        assertEquals(CommandType.DELETECOMMAND, command.getCommandType());
+    }
+
+    @Test
     public void equalsTest() {
         String[] commands1 = {"delete", "1"};
         String[] commands2 = {"delete", "1"};

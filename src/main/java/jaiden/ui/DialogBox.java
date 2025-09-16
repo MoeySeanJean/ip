@@ -26,13 +26,13 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            fxmlLoader.<MainWindow>getController().showLoadingError("⚠ The source file is corrupted.");
         }
 
         this.dialog.setText(text);

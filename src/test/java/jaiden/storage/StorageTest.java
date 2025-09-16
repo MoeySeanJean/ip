@@ -70,7 +70,7 @@ public class StorageTest {
     @Test
     void saveTest_invalidFile_exceptionThrown() {
         try {
-            Storage storage = new Storage("data");
+            Storage storage = new Storage("");
             ArrayList<Task> test = new ArrayList<>();
             test.add(new Todo("test"));
             test.add(new Deadline("test", LocalDate.parse("2025-08-22")));
@@ -81,7 +81,7 @@ public class StorageTest {
             storage.save(new TaskList(test));
             fail();
         } catch (Exception e) {
-            assertEquals(new JaidenException("data (Access is denied)").getMessage(), e.getMessage());
+            assertEquals(new JaidenException("Save failed.").getMessage(), e.getMessage());
         }
     }
 }

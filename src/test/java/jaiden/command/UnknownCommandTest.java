@@ -26,6 +26,13 @@ public class UnknownCommandTest {
     }
 
     @Test
+    public void getCommandTest() {
+        String[] commands = {"test"};
+        Command command = new UnknownCommand(commands);
+        assertEquals(CommandType.ERRORCOMMAND, command.getCommandType());
+    }
+
+    @Test
     public void equalsTest() {
         String[] commands1 = {"test"};
         String[] commands2 = {"test"};

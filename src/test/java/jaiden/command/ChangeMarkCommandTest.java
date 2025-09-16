@@ -56,6 +56,13 @@ public class ChangeMarkCommandTest {
     }
 
     @Test
+    public void getCommandTest() {
+        String[] commands = {"mark", "1"};
+        Command command = new ChangeMarkCommand(commands);
+        assertEquals(CommandType.CHANGEMARKCOMMAND, command.getCommandType());
+    }
+
+    @Test
     public void equalsTest() {
         String[] commands1 = {"mark", "1"};
         String[] commands2 = {"mark", "1"};
